@@ -1,0 +1,22 @@
+[
+  {"query": "hey can you review this python file for me? it's in src/api/users.py, been getting weird errors in prod", "should_trigger": true},
+  {"query": "can you check my code for bugs? here's the function: async function getData() { const res = await fetch(url); return res.json() }", "should_trigger": true},
+  {"query": "i need someone to audit this flask endpoint before we ship it, worried about security holes", "should_trigger": true},
+  {"query": "quick look at this react component - I think there might be a memory leak somewhere in the useEffect", "should_trigger": true},
+  {"query": "any issues with this typescript? my coworker wrote it and i don't trust it lol", "should_trigger": true},
+  {"query": "can u check if this SQL query is safe to run? SELECT * FROM users WHERE id = ' + userId", "should_trigger": true},
+  {"query": "performance review needed - this loop runs 10k times and page is slow as hell", "should_trigger": true},
+  {"query": "is this code ok to merge? just want a second pair of eyes before i push to main", "should_trigger": true},
+  {"query": "look at this and tell me what's wrong, it keeps throwing a null pointer exception on line 42", "should_trigger": true},
+  {"query": "we got hacked last week, can you check our auth middleware for vulnerabilities? it's in middleware/auth.js", "should_trigger": true},
+  {"query": "write me a python function that sorts a list of dictionaries by a given key", "should_trigger": false},
+  {"query": "explain how async/await works in javascript with some examples", "should_trigger": false},
+  {"query": "what's the difference between sql and nosql databases?", "should_trigger": false},
+  {"query": "can you help me write unit tests for my UserService class?", "should_trigger": false},
+  {"query": "refactor this function to be more readable, right now it's a mess", "should_trigger": false},
+  {"query": "i need to deploy my node app to AWS, what's the easiest way?", "should_trigger": false},
+  {"query": "convert this javascript code to typescript for me", "should_trigger": false},
+  {"query": "help me debug this - when i run npm install i get ERESOLVE errors", "should_trigger": false},
+  {"query": "what are the best practices for structuring a react project?", "should_trigger": false},
+  {"query": "update the README with instructions for running the dev server", "should_trigger": false}
+]
