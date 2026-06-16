@@ -1,0 +1,6 @@
+{
+  "name": "skill-authoring",
+  "version": "1.0.0",
+  "description": "Audit, grade, and improve Claude Code skills and Cursor rules, and resolve overlap between them.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}
