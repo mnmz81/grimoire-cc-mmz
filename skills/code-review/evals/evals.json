@@ -1,0 +1,20 @@
+{
+  "skill_name": "code-review",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Hey can you review this JS function? We've been getting weird race conditions in prod and I'm not sure why:\n\n```javascript\nasync function processUserOrders(userIds) {\n  const results = [];\n  for (const id of userIds) {\n    const user = await db.users.findOne({ id });\n    const orders = await db.orders.find({ userId: id });\n    results.push({ user, orders });\n  }\n  return results;\n}\n\nasync function renderUserPage(req, res) {\n  const userId = req.params.id;\n  const template = await fs.readFile(`./templates/${userId}.html`, 'utf8');\n  res.send(template);\n}\n```",
+      "expected_output": "Review should identify: (1) Bug - sequential awaits in loop should use Promise.all, (2) Security - path traversal in renderUserPage where userId is used directly in file path without sanitization, (3) Performance - N+1 pattern in processUserOrders querying db once per user"
+    },
+    {
+      "id": 1,
+      "prompt": "Can you check this Python Flask route for any issues? It's a user search endpoint:\n\n```python\nfrom flask import Flask, request, jsonify\nimport sqlite3\nimport pickle\nimport base64\n\napp = Flask(__name__)\n\n@app.route('/search')\ndef search_users():\n    query = request.args.get('q', '')\n    conn = sqlite3.connect('users.db')\n    cursor = conn.cursor()\n    cursor.execute(f\"SELECT * FROM users WHERE name LIKE '%{query}%'\")\n    rows = cursor.fetchall()\n    conn.close()\n    return jsonify(rows)\n\n@app.route('/load-session')\ndef load_session():\n    data = request.cookies.get('session_data', '')\n    session = pickle.loads(base64.b64decode(data))\n    return jsonify({'user': session.get('user')})\n\ndef get_all_users(conn, filters=[]):\n    query = 'SELECT * FROM users'\n    if filters:\n        query += ' WHERE ' + ' AND '.join(filters)\n    cursor = conn.cursor()\n    cursor.execute(query)\n    return cursor.fetchall()\n```",
+      "expected_output": "Review should identify: (1) Critical Security - SQL injection in search_users via f-string interpolation, (2) Critical Security - unsafe pickle deserialization of untrusted cookie data (RCE), (3) Bug - mutable default argument in get_all_users"
+    },
+    {
+      "id": 2,
+      "prompt": "Please review this React TypeScript component, we think it might have a memory leak:\n\n```typescript\nimport React, { useState, useEffect } from 'react';\n\ninterface Props {\n  userId: string;\n}\n\nconst UserDashboard: React.FC<Props> = ({ userId }) => {\n  const [data, setData] = useState<any>(null);\n  const [ws, setWs] = useState<WebSocket | null>(null);\n\n  useEffect(() => {\n    const socket = new WebSocket(`ws://api.internal/${userId}`);\n    socket.onmessage = (event) => {\n      setData(JSON.parse(event.data));\n    };\n    setWs(socket);\n\n    fetch(`/api/users/${userId}/profile`)\n      .then(r => r.json())\n      .then(profile => setData(profile));\n  }, [userId]);\n\n  const handleUpdate = async (field: string, value: string) => {\n    const res = await fetch(`/api/users/${userId}/update`, {\n      method: 'POST',\n      body: JSON.stringify({ [field]: value }),\n    });\n    const updated = await res.json();\n    setData(updated);\n  };\n\n  return (\n    <div>\n      <h1>{data?.name}</h1>\n      <div dangerouslySetInnerHTML={{ __html: data?.bio }} />\n    </div>\n  );\n};\n\nexport default UserDashboard;\n```",
+      "expected_output": "Review should identify: (1) Bug/Memory leak - WebSocket not closed on cleanup (missing useEffect return cleanup), (2) Security - dangerouslySetInnerHTML with unsanitized data?.bio (XSS), (3) Bug - fetch in useEffect has no cleanup/abort for when component unmounts, (4) Bug - use of 'any' type hiding potential issues"
+    }
+  ]
+}

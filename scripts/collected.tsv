@@ -1,0 +1,57 @@
+skill	graphify	/Users/mzakay/.claude/skills/graphify	skills/graphify
+skill	karpathy-guidelines	/Users/mzakay/.claude/skills/karpathy-guidelines	skills/karpathy-guidelines
+skill	skill-qa-agent	/Users/mzakay/.claude/skills/skill-qa-agent	skills/skill-qa-agent
+skill	ui-ux-design	/Users/mzakay/.claude/skills/ui-ux-design	skills/ui-ux-design
+skill	blueprint	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/blueprint	skills/blueprint
+skill	compass	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/compass	skills/compass
+skill	conductor	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/conductor	skills/conductor
+skill	curator	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/curator	skills/curator
+skill	foreman	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/foreman	skills/foreman
+skill	gauge	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/gauge	skills/gauge
+skill	hunt	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/hunt	skills/hunt
+skill	marshal	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/marshal	skills/marshal
+skill	palette	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/palette	skills/palette
+skill	prowler	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/prowler	skills/prowler
+skill	quartermaster	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/quartermaster	skills/quartermaster
+skill	scribe	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/scribe	skills/scribe
+skill	sentinel-a11y	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/sentinel-a11y	skills/sentinel-a11y
+skill	sleuth	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/sleuth	skills/sleuth
+skill	staff	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/staff	skills/staff
+skill	warden	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/warden	skills/warden
+skill	code-review	/Users/mzakay/Desktop/code project/miluim hr/skills/code-review	skills/code-review
+agent	hunt-cipher.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/agents/hunt-cipher.md	agents/hunt-cipher.md
+agent	hunt-drift.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/agents/hunt-drift.md	agents/hunt-drift.md
+agent	hunt-echo.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/agents/hunt-echo.md	agents/hunt-echo.md
+agent	hunt-hollow.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/agents/hunt-hollow.md	agents/hunt-hollow.md
+agent	hunt-lattice.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/agents/hunt-lattice.md	agents/hunt-lattice.md
+agent	hunt-ledger.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/agents/hunt-ledger.md	agents/hunt-ledger.md
+agent	hunt-prism.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/agents/hunt-prism.md	agents/hunt-prism.md
+agent	hunt-specter.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/agents/hunt-specter.md	agents/hunt-specter.md
+agent	hunt-tripwire.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/agents/hunt-tripwire.md	agents/hunt-tripwire.md
+agent	hunt-vapor.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/agents/hunt-vapor.md	agents/hunt-vapor.md
+agent	blueprint.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/blueprint.agent.md	agents/blueprint.agent.md
+agent	compass.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/compass.agent.md	agents/compass.agent.md
+agent	conductor.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/conductor.agent.md	agents/conductor.agent.md
+agent	curator.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/curator.agent.md	agents/curator.agent.md
+agent	foreman.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/foreman.agent.md	agents/foreman.agent.md
+agent	gauge.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/gauge.agent.md	agents/gauge.agent.md
+agent	hunt-cipher.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt-cipher.agent.md	agents/hunt-cipher.agent.md
+agent	hunt-drift.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt-drift.agent.md	agents/hunt-drift.agent.md
+agent	hunt-echo.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt-echo.agent.md	agents/hunt-echo.agent.md
+agent	hunt-hollow.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt-hollow.agent.md	agents/hunt-hollow.agent.md
+agent	hunt-lattice.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt-lattice.agent.md	agents/hunt-lattice.agent.md
+agent	hunt-ledger.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt-ledger.agent.md	agents/hunt-ledger.agent.md
+agent	hunt-prism.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt-prism.agent.md	agents/hunt-prism.agent.md
+agent	hunt-specter.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt-specter.agent.md	agents/hunt-specter.agent.md
+agent	hunt-tripwire.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt-tripwire.agent.md	agents/hunt-tripwire.agent.md
+agent	hunt-vapor.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt-vapor.agent.md	agents/hunt-vapor.agent.md
+agent	hunt.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/hunt.agent.md	agents/hunt.agent.md
+agent	marshal.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/marshal.agent.md	agents/marshal.agent.md
+agent	palette.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/palette.agent.md	agents/palette.agent.md
+agent	prowler.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/prowler.agent.md	agents/prowler.agent.md
+agent	quartermaster.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/quartermaster.agent.md	agents/quartermaster.agent.md
+agent	scribe.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/scribe.agent.md	agents/scribe.agent.md
+agent	sentinel-a11y.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/sentinel-a11y.agent.md	agents/sentinel-a11y.agent.md
+agent	sleuth.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/sleuth.agent.md	agents/sleuth.agent.md
+agent	staff.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/staff.agent.md	agents/staff.agent.md
+agent	warden.agent.md	/Users/mzakay/Desktop/code project/Mushilu-San-UI/team/agents/warden.agent.md	agents/warden.agent.md

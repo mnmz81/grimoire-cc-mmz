@@ -1,0 +1,32 @@
+---
+description: Audit and improve Cursor .mdc rules and Claude skills against the QA rubric, and flag overlap. Applies when reviewing, grading, gating, or improving a skill or rule. Defers full workflow to the skill-qa-agent skill.
+alwaysApply: false
+globs: ["**/.cursor/rules/*.mdc", "**/skills/**/SKILL.md"]
+---
+
+# Skill QA (Cursor counterpart)
+
+Native Cursor counterpart of the `skill-qa-agent` skill. Keep this thin — the
+full rubric, scripts, and workflows live in the skill.
+
+counterpart: skill:skill-qa-agent
+
+## Operating contract — never bypass
+
+- **Always ask first.** Confirm scope and exact targets before any write.
+- **Audits are read-only.** Grading and reports never edit a skill/rule; run freely.
+- **Writes are double-gated.** GATE 1 approve the plan → snapshot → propose → GATE 2 approve the diff → apply.
+- **Snapshot before write** to `~/.claude/skill-qa/history/<name>/<timestamp>/` (no git; only rollback).
+- **Lint on edit.** After creating or editing any rule, run the lint script immediately.
+
+## Bands
+
+🔴 Red <60 · 🟠 Amber 60–79 · 🟢 Green 80–89 · 🥇 Gold 90+. Fix Red/Amber.
+
+## How to run
+
+- Tier 1 lint: `python -m scripts.lint_skill --format mdc <path>` (from the skill dir).
+- Tier 2 grading: read the rule + the skill's rubric-mdc reference, grade each judgment dimension inline, twice.
+- Overlap: `python -m scripts.similarity --index <skill-index.json>`, then adjudicate per the skill's overlap playbook.
+
+For full workflows (W1 audit, W2 improvement, W3 new-rule gate, W4 overlap resolution), use the `skill-qa-agent` skill.
