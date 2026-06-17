@@ -1,0 +1,6 @@
+{
+  "name": "studio-ops",
+  "version": "1.0.0",
+  "description": "Studio operations — release engineering, safety-marker hooks, and the learnings/memory log.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}

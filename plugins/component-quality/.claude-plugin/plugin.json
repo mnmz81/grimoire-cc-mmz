@@ -1,0 +1,6 @@
+{
+  "name": "component-quality",
+  "version": "1.0.0",
+  "description": "Quality gates for UI components — staff review, token/design discipline, accessibility, bundle budget, unit + browser testing, and docs.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}

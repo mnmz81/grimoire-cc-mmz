@@ -1,0 +1,6 @@
+{
+  "name": "code-intelligence",
+  "version": "1.0.0",
+  "description": "Turn any codebase or input into a queryable knowledge graph for architecture and relationship questions.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}
