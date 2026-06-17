@@ -1,6 +1,7 @@
 ---
 name: sentinel-a11y
 description: Audits a component against the library's mandatory accessibility contract — roles, keyboard, contrast, focus, touch targets, motion, and the required Accessibility story. Use when: a component is built and the user wants an accessibility audit, asks to "check a11y", "verify ARIA/keyboard", "audit accessibility", or gate a component before review sign-off. Fifth stage of the Studio pipeline.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 <!-- GENERATED — do not edit here. Edit the source under team/agents and re-run the Studio sync script. -->

@@ -3,6 +3,7 @@ name: skill-qa-agent
 description: Audit, grade, and improve Claude Code skills and Cursor .mdc rules, and find or resolve overlap between them. Use when reviewing a skill or rule for quality, grading a skill against a rubric, running a full library audit, gating a new skill before it ships, resolving redundancy or overlap between skills or rules, or improving an existing skill with a quality report.
 metadata:
   counterpart: mdc:skill-qa
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write, Task]
 ---
 
 # Skill QA Agent

@@ -1,6 +1,7 @@
 ---
 name: staff
 description: Staff-engineer review of a component diff for Angular-zoneless correctness, security, and simplicity — signal APIs, OnPush, no innerHTML, surgical changes. Use when: a component or change is built and the user wants a code review, asks to "review the diff", "staff review", "check the implementation", or catch correctness/over-engineering before tests and ship. Sixth stage of the Studio pipeline.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 <!-- GENERATED — do not edit here. Edit the source under team/agents and re-run the Studio sync script. -->

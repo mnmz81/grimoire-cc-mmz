@@ -1,6 +1,7 @@
 ---
 name: ui-ux-design
 description: "UI/UX design intelligence for web and mobile. Use when building or reviewing pages, components, dashboards, landing pages, forms, navigation, charts, or any visual interface. Covers accessibility, touch targets, performance, style selection, layout, typography, animation, forms, navigation patterns, and data visualization across React, Next.js, Vue, Svelte, Tailwind, shadcn/ui, React Native, Flutter, SwiftUI, and HTML/CSS."
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 # UI/UX Design Intelligence

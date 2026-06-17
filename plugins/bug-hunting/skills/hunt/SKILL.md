@@ -1,6 +1,7 @@
 ---
 name: hunt
 description: Whole-repo bug sweep — fans out read-only hunters across the codebase, dedups findings by stable H-ID, and (on --file-issues) opens exactly one GitHub issue per unique bug via open-audit-issues.sh. Use when: the user wants a repo-wide bug scan ("run the hunt", "scan for bugs"), or after a batch of changes ship to check for cross-cutting regressions. Runs independently of any per-component checks.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write, Task]
 ---
 
 

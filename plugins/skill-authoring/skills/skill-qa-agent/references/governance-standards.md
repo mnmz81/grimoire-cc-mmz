@@ -12,7 +12,7 @@ the agent judges the rest.
 
 ## Frontmatter
 
-**Skills (SKILL.md)** — allowed top-level keys: `name`, `description`, `metadata`. Nothing else.
+**Skills (SKILL.md)** — allowed top-level keys: `name`, `description`, `metadata`, `allowed-tools`. Nothing else.
 - `name`: required, kebab-case.
 - `description`: required, **third person**, leads with capability then **"Use when…"** triggering conditions. States *what + when*, never the workflow/process (workflow leakage causes Claude to shortcut past the body). 40–700 chars, no `<`/`>`.
 - `metadata`: optional map. Cross-tree linkage lives here as `metadata.counterpart: mdc:<name>` (keeps the top-level allowlist clean).

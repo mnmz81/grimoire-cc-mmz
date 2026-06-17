@@ -1,6 +1,7 @@
 ---
 name: foreman
 description: Drives a locked spec into code by running the existing 9-step component workflow one subtask at a time, tracking status without restating the steps. Use when: a Blueprint spec exists and the user wants to build/implement/scaffold a Mushilu-San-UI component, or says "build it", "start the component", or "run the workflow". Third stage of the Studio pipeline.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write, Task]
 ---
 
 <!-- GENERATED — do not edit here. Edit the source under team/agents and re-run the Studio sync script. -->

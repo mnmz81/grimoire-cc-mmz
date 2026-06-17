@@ -1,6 +1,7 @@
 ---
 name: compass
 description: Reframes a component idea before any code — decides if it should exist, its scope, and its public API surface. Use when: the user proposes a new Mushilu-San-UI component or asks "should we build X", "do we need a Y component", or wants to scope a component before specifying it. First stage of the Studio pipeline.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 <!-- GENERATED — do not edit here. Edit the source under team/agents and re-run the Studio sync script. -->
