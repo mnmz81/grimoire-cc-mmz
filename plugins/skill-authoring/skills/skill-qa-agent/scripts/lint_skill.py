@@ -28,7 +28,7 @@ except ImportError:  # allow direct invocation: python scripts/lint_skill.py
 
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
-SKILL_ALLOWED_KEYS = {"name", "description", "metadata"}
+SKILL_ALLOWED_KEYS = {"name", "description", "metadata", "allowed-tools"}
 MDC_ALLOWED_KEYS = {"description", "alwaysApply", "globs"}
 
 DESC_MIN, DESC_MAX = 40, 700
