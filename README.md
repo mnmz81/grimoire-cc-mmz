@@ -20,7 +20,6 @@ Replace `<domain>` with any plugin below, e.g. `/plugin install bug-hunting@grim
 | `component-quality` | Quality gates — review, design tokens, a11y, bundle budget, unit + browser tests, docs (staff, palette, sentinel-a11y, gauge, marshal, prowler, scribe). |
 | `bug-hunting` | Whole-repo bug sweeps + root-cause debugging (hunt, sleuth, and 10 `hunt-*` hunter agents). |
 | `studio-ops` | Release engineering, safety-marker hooks, learnings log (quartermaster, warden, curator). |
-| `code-intelligence` | Knowledge-graph codebase Q&A (graphify). |
 | `ai-coding-discipline` | Guidelines that reduce common LLM coding mistakes (karpathy-guidelines). |
 | `skill-authoring` | Audit, grade, and improve skills & rules (skill-qa-agent). |
 | `ux-design` | UI/UX design intelligence for web and mobile (ui-ux-design). |
