@@ -47,7 +47,7 @@ Phase 1 collected 21 skills + 36 agents (lossless). Phase 2 grouped the **shippa
 | skill | `curator` | `studio-ops` | `/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/curator` | `plugins/studio-ops/skills/curator` |
 | skill | `foreman` | `component-design` | `/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/foreman` | `plugins/component-design/skills/foreman` |
 | skill | `gauge` | `component-quality` | `/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/gauge` | `plugins/component-quality/skills/gauge` |
-| skill | `graphify` | `code-intelligence` | `/Users/mzakay/.claude/skills/graphify` | `plugins/code-intelligence/skills/graphify` |
+| skill | `graphify` | — (dropped: requires external `pip install graphifyy`) | `/Users/mzakay/.claude/skills/graphify` | — (not shipped; in git history) |
 | skill | `hunt` | `bug-hunting` | `/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/hunt` | `plugins/bug-hunting/skills/hunt` |
 | skill | `karpathy-guidelines` | `ai-coding-discipline` | `/Users/mzakay/.claude/skills/karpathy-guidelines` | `plugins/ai-coding-discipline/skills/karpathy-guidelines` |
 | skill | `marshal` | `component-quality` | `/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/marshal` | `plugins/component-quality/skills/marshal` |
@@ -70,7 +70,6 @@ Phase 1 collected 21 skills + 36 agents (lossless). Phase 2 grouped the **shippa
 | `component-quality` | gauge, marshal, palette, prowler, scribe, sentinel-a11y, staff | — |
 | `bug-hunting` | hunt, sleuth | 10 `hunt-*` |
 | `studio-ops` | curator, quartermaster, warden | — |
-| `code-intelligence` | graphify | — |
 | `ai-coding-discipline` | karpathy-guidelines | — |
 | `skill-authoring` | skill-qa-agent | — |
 | `ux-design` | ui-ux-design | — |
