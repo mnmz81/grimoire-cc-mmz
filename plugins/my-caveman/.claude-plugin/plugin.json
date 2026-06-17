@@ -1,0 +1,6 @@
+{
+  "name": "my-caveman",
+  "version": "1.0.0",
+  "description": "Caveman output compression — terse, telegraphic replies that cut output tokens while keeping full technical accuracy. Modes: lite, full, ultra, wenyan.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}
