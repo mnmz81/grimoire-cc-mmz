@@ -25,6 +25,7 @@ Replace `<domain>` with any plugin below, e.g. `/plugin install bug-hunting@grim
 | `skill-authoring` | Audit, grade, and improve skills & rules (skill-qa-agent). |
 | `ux-design` | UI/UX design intelligence for web and mobile (ui-ux-design). |
 | `code-review` | Thorough JS/TS/Python code review — bugs, security, performance. |
+| `my-caveman` | Caveman output compression — terse, telegraphic replies that cut tokens while keeping accuracy (modes: lite, full, ultra, wenyan). |
 
 See [`INVENTORY.md`](./INVENTORY.md) for the full asset → domain mapping and provenance.
 
