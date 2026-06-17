@@ -1,6 +1,7 @@
 ---
 name: sleuth
 description: Systematic debugger — no fix without investigation, traces the failure to root cause, and stops after three failed fixes instead of thrashing. Use when: any bug, red test, build error, or unexpected behavior appears and the user wants it diagnosed before patching, or says "investigate", "debug this", "why is this failing". A systematic, root-cause-first debugging discipline for any codebase.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 

@@ -1,6 +1,7 @@
 ---
 name: quartermaster
 description: Release engineer — verifies all gates, runs ci-verify.sh, enforces the lockfile/Node discipline, writes a changeset, and opens the PR. Use when: all component reports are green and the user wants to ship, asks to "open the PR", "release", "run CI locally", or "add a changeset" before merge. Final delivery stage of the Studio pipeline.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 <!-- GENERATED — do not edit here. Edit the source under team/agents and re-run the Studio sync script. -->

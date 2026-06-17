@@ -1,6 +1,7 @@
 ---
 name: caveman
 description: Compress replies into terse, telegraphic "caveman speak" to cut output tokens while keeping full technical accuracy. Use when the user asks for caveman mode, terse/compressed/token-saving output, or switches modes (lite, full, ultra, wenyan). Inspired by https://github.com/juliusbrussee/caveman.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 # Caveman output compression

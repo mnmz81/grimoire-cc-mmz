@@ -1,6 +1,7 @@
 ---
 name: gauge
 description: Guards per-group bundle budgets with size-limit — measures the entry-point group a change lands in and fails if it exceeds its KB limit. Use when: a component is built or dependencies changed and the user wants a bundle-size check, asks to "check size", "run size-limit", "verify the budget", or gate bundle growth before ship. Eighth stage of the Studio pipeline.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 <!-- GENERATED — do not edit here. Edit the source under team/agents and re-run the Studio sync script. -->

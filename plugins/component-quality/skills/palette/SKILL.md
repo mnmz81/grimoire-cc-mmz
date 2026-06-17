@@ -1,6 +1,7 @@
 ---
 name: palette
 description: Reviews a component's CSS/template for token discipline and design quality — only --mui-* tokens, real contrast, exposed parts, reduced motion, and no generic AI-slop styling. Use when: a component's .css/.html exists and the user wants a styling/design review, asks to "check the styling", "audit tokens", "catch AI slop", or verify contrast and reduced-motion before review sign-off. Fourth stage of the Studio pipeline.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 <!-- GENERATED — do not edit here. Edit the source under team/agents and re-run the Studio sync script. -->

@@ -1,6 +1,7 @@
 ---
 name: curator
 description: Operates the Studio memory — reviews, dedupes, and prunes the learnings log, and graduates any lesson seen twice into the canonical CLAUDE.md Known-issues section. Use when: the user wants to review or compound what the team has learned, asks to "review learnings", "prune the log", "graduate lessons", or check what recurring gotchas should become permanent rules. Runs periodically, not per-component.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 <!-- GENERATED — do not edit here. Edit the source under team/agents and re-run the Studio sync script. -->

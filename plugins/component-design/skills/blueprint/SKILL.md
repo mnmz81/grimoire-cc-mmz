@@ -1,6 +1,7 @@
 ---
 name: blueprint
 description: Locks a component's contract before code — selector, entry-point group, signal API, types, a11y matrix, test matrix, and bundle headroom. Use when: a Compass brief exists and the user wants to specify a Mushilu-San-UI component before building it, or asks to "spec", "design the API", or "lock the contract" for a component. Second stage of the Studio pipeline.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 <!-- GENERATED — do not edit here. Edit the source under team/agents and re-run the Studio sync script. -->
