@@ -1,0 +1,6 @@
+{
+  "name": "debugging",
+  "version": "1.0.0",
+  "description": "Systematic, root-cause-first debugging discipline for any codebase — investigate before editing, one hypothesis at a time, stop after three failed fixes.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}

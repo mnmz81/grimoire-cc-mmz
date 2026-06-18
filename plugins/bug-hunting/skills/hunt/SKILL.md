@@ -42,6 +42,11 @@ Absent `--file-issues` in the user's message: write `.bug-hunt/bug-hunt.md` only
 Spawn all ten at once — do not wait for one before starting the next. Each writes
 `.bug-hunt/<category>.hunt.md` when done.
 
+Every hunter shares one protocol (scope, H-ID algorithm, output line format, severity, the
+zero-findings rule) defined once in `${CLAUDE_PLUGIN_ROOT}/references/hunter-core.md`; each
+hunter file carries only its own category patterns. When spawning, tell each hunter to read
+that core file first — it is the single source of the finding-line contract this skill dedups on.
+
 ## Finding line format (produced by hunters)
 
 Each line in a `*.hunt.md` file:
@@ -92,10 +97,12 @@ hunt-vapor ✅ 2 | hunt-ledger ✅ 0
 For each finding in severity order (critical → high → medium → low → info), run:
 
 ```bash
-./scripts/open-audit-issues.sh --new "<ID>" "<severity>" "<category>" "<title>" "<one-line-desc>"
+"${CLAUDE_PLUGIN_ROOT}/scripts/open-audit-issues.sh" --new "<ID>" "<severity>" "<category>" "<title>" "<one-line-desc>"
 ```
 
-The script is idempotent: if `[AUDIT] <ID>:` already exists in any state it skips silently.
+The script ships with this plugin (`${CLAUDE_PLUGIN_ROOT}/scripts/`), so it travels on install
+and needs nothing in the target repo except an authenticated `gh`. It is idempotent: if
+`[AUDIT] <ID>:` already exists in any state it skips silently.
 If a call fails: log `FAILED: <ID>` in the Disposition column and **continue** — never abort.
 
 After all calls, update Disposition: `#<gh-issue-number>` (created), `skipped` (existed),
