@@ -1,6 +1,0 @@
-{
-  "name": "component-design",
-  "version": "1.0.0",
-  "description": "Plan and lock a UI component's contract before code — scoping, public API design, and build orchestration for the Mushilu-San Studio pipeline.",
-  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
-}

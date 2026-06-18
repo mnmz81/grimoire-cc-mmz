@@ -10,7 +10,7 @@ description: >
   mentions one concern (e.g. "check for bugs"), apply all three lenses —
   bugs, security, and performance — because issues often compound across
   categories and users appreciate the completeness.
-allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
+allowed-tools: [Read, Grep, Glob]
 ---
 
 # Code Review Skill

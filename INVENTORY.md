@@ -1,6 +1,8 @@
 # INVENTORY
 
-Phase 1 collected 21 skills + 36 agents (lossless). Phase 2 grouped the **shippable** assets — 21 skills + the 10 valid generated hunter agents — into 9 domain plugins under `plugins/`. The 26 `team/agents/*.agent.md` files are non-standard Studio *build sources* (not valid Claude Code agents) and were **dropped from the plugins**; they remain in git history.
+Phase 1 collected 21 skills + 36 agents (lossless). Phase 2 grouped the **shippable** assets — 21 skills + the 10 valid generated hunter agents — into domain plugins under `plugins/`. The 26 `team/agents/*.agent.md` files are non-standard Studio *build sources* (not valid Claude Code agents) and were **dropped from the plugins**; they remain in git history.
+
+> **Current layout is the generated "Domains → plugins" table at the bottom** (run `scripts/generate-catalog.py`). A later restructure consolidated the three split Studio plugins (`component-design`, `component-quality`, `studio-ops`) into one workflow-aligned **`mushilu-studio`** plugin, moved the read-only review/audit stages (palette, staff, sentinel-a11y, gauge) into its `agents/`, and split `sleuth` into its own **`debugging`** plugin. The **Came-from / Now-at** provenance table below is **historical** — its "Now at" column records the original Phase-2 grouping, not the post-restructure paths.
 
 | Type | Name | Domain | Came-from | Now at |
 | ---- | ---- | ------ | --------- | ------ |
@@ -62,18 +64,24 @@ Phase 1 collected 21 skills + 36 agents (lossless). Phase 2 grouped the **shippa
 | skill | `ui-ux-design` | `ux-design` | `/Users/mzakay/.claude/skills/ui-ux-design` | `plugins/ux-design/skills/ui-ux-design` |
 | skill | `warden` | `studio-ops` | `/Users/mzakay/Desktop/code project/Mushilu-San-UI/.claude/skills/warden` | `plugins/studio-ops/skills/warden` |
 
+<!-- BEGIN GENERATED: domains (scripts/generate-catalog.py) -->
+
 ## Domains → plugins
 
 | Plugin | Skills | Agents |
 | ------ | ------ | ------ |
-| `component-design` | blueprint, compass, conductor, foreman | — |
-| `component-quality` | gauge, marshal, palette, prowler, scribe, sentinel-a11y, staff | — |
-| `bug-hunting` | hunt, sleuth | 10 `hunt-*` |
-| `studio-ops` | curator, quartermaster, warden | — |
 | `ai-coding-discipline` | karpathy-guidelines | — |
+| `bug-hunting` | hunt | hunt-cipher, hunt-drift, hunt-echo, hunt-hollow, hunt-lattice, hunt-ledger, hunt-prism, hunt-specter, hunt-tripwire, hunt-vapor |
+| `code-review` | code-review | — |
+| `debugging` | sleuth | — |
+| `mushilu-studio` | blueprint, compass, conductor, curator, foreman, marshal, prowler, quartermaster, scribe, warden | gauge, palette, sentinel-a11y, staff |
+| `my-caveman` | caveman | — |
 | `skill-authoring` | skill-qa-agent | — |
 | `ux-design` | ui-ux-design | — |
-| `code-review` | code-review | — |
+
+_8 plugins. This table is generated — run `scripts/generate-catalog.py`._
+
+<!-- END GENERATED: domains -->
 
 **Dropped (not in any plugin):** 26 `team/agents/*.agent.md` Studio build sources — preserved in git history and on the Phase 1 merge commit.
 

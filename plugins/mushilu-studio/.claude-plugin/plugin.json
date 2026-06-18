@@ -1,0 +1,6 @@
+{
+  "name": "mushilu-studio",
+  "version": "1.0.0",
+  "description": "End-to-end Mushilu-San-UI component pipeline — scope, spec, build, parallel review/audit, test, docs, and release — orchestrated as one workflow.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}

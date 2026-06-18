@@ -1,0 +1,35 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Catalog in sync with plugin.json manifests
+        run: python3 scripts/generate-catalog.py --check
+
+      - name: Shellcheck vendored scripts
+        run: |
+          sudo apt-get update -y && sudo apt-get install -y shellcheck
+          shellcheck plugins/bug-hunting/scripts/open-audit-issues.sh
+
+      # `claude plugin validate` runs when the CLI is available in CI; the catalog
+      # drift gate above is the always-on check that needs no external tooling.
+      - name: Validate plugins (if Claude CLI present)
+        run: |
+          if command -v claude >/dev/null 2>&1; then
+            claude plugin validate .
+          else
+            echo "claude CLI not installed in CI runner — skipping plugin validate."
+          fi

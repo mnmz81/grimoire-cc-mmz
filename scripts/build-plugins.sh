@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
-# build-plugins.sh — Phase 2: reshape flat skills/ + agents/ into a domain-based
-# plugin marketplace. Uses `git mv` to preserve history.
+# build-plugins.sh — ONE-SHOT Phase 2 migration (historical). Reshaped the flat
+# skills/ + agents/ layout into the domain-based plugins/ tree via `git mv`.
 #
-# Drops the non-standard team/agents/*.agent.md files (kept in git history / Phase 1).
+# It has already run; the plugins/ tree is now the source of truth. Do NOT re-run it:
+# its hardcoded DOMAINS list is frozen at migration time (it still lists the dropped
+# `code-intelligence`/graphify and predates `my-caveman`) and it expects the old flat
+# layout that no longer exists. Kept only for provenance.
 #
-# Usage: scripts/build-plugins.sh
+# To regenerate marketplace.json + the INVENTORY domains table from the current
+# plugin.json manifests, use the maintained generator instead:
+#     scripts/generate-catalog.py            # rewrite
+#     scripts/generate-catalog.py --check    # CI drift gate
+#
+# Usage: scripts/build-plugins.sh   (historical; see note above)
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
