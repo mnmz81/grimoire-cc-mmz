@@ -1,105 +1,78 @@
 #!/usr/bin/env bash
-# update-plugin.sh — regenerate catalog, commit, push, and refresh the local
-# Claude Code marketplace clone + plugin cache so changes take effect immediately.
+# update-plugin.sh — sync the current repo state into Claude Code's local
+# marketplace clone and plugin cache so changes take effect on next session.
 #
-# Usage:
-#   scripts/update-plugin.sh                    # auto-commit with generated message
-#   scripts/update-plugin.sh "commit message"   # custom commit message
-#   scripts/update-plugin.sh --catalog-only     # regenerate catalog, no commit/push/refresh
+# BRANCH GUARD: only runs on the 'main' branch. Feature branches are blocked
+# to prevent incomplete or untested changes from reaching the local plugin system.
+#
+# Usage: scripts/update-plugin.sh
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+REQUIRED_BRANCH="main"
 MARKETPLACE_CLONE="$HOME/.claude/plugins/marketplaces/grimoire-cc-mmz"
 PLUGIN_CACHE="$HOME/.claude/plugins/cache/grimoire-cc-mmz"
 INSTALLED_PLUGINS="$HOME/.claude/plugins/installed_plugins.json"
-CATALOG_ONLY=false
-COMMIT_MSG=""
 
-for arg in "$@"; do
-  case "$arg" in
-    --catalog-only) CATALOG_ONLY=true ;;
-    *) COMMIT_MSG="$arg" ;;
-  esac
-done
+# --- Branch guard ---
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [ "$CURRENT_BRANCH" != "$REQUIRED_BRANCH" ]; then
+  echo "ERROR: update-plugin.sh can only run on '$REQUIRED_BRANCH'."
+  echo "       Current branch: '$CURRENT_BRANCH'"
+  echo "       Merge your changes to $REQUIRED_BRANCH first, then re-run."
+  exit 1
+fi
 
 # --- Step 1: Regenerate catalog ---
-echo "==> Regenerating catalog (marketplace.json + INVENTORY.md)..."
+echo "==> Regenerating catalog..."
 python3 scripts/generate-catalog.py
 echo "    done."
 
-if $CATALOG_ONLY; then
-  echo "==> --catalog-only: stopping here."
-  exit 0
-fi
-
-# --- Step 2: Stage and commit ---
-echo "==> Staging changes..."
-git add -A
-
-if git diff --cached --quiet; then
-  echo "    nothing to commit — working tree clean."
-else
-  if [ -z "$COMMIT_MSG" ]; then
-    changed=$(git diff --cached --name-only | head -20)
-    COMMIT_MSG="Update plugin: $(echo "$changed" | head -3 | tr '\n' ', ' | sed 's/,$//')"
-  fi
-  echo "    committing: $COMMIT_MSG"
-  git commit -m "$COMMIT_MSG"
-fi
-
-# --- Step 3: Push to origin ---
-BRANCH=$(git rev-parse --abbrev-ref HEAD)
-echo "==> Pushing $BRANCH to origin..."
-git push origin "$BRANCH"
-NEW_SHA=$(git rev-parse HEAD)
-echo "    pushed: $NEW_SHA"
-
-# --- Step 4: Update marketplace clone ---
-if [ -d "$MARKETPLACE_CLONE/.git" ]; then
-  echo "==> Updating marketplace clone at $MARKETPLACE_CLONE..."
-  git -C "$MARKETPLACE_CLONE" fetch origin
-  git -C "$MARKETPLACE_CLONE" reset --hard "origin/$BRANCH"
-  CLONE_SHA=$(git -C "$MARKETPLACE_CLONE" rev-parse HEAD)
-  echo "    clone now at: $CLONE_SHA"
+# --- Step 2: Sync into marketplace clone ---
+if [ -d "$MARKETPLACE_CLONE" ]; then
+  echo "==> Syncing to marketplace clone..."
+  rsync -a --delete \
+    --exclude='.git' \
+    --exclude='.DS_Store' \
+    --exclude='node_modules' \
+    --exclude='__pycache__' \
+    "$ROOT/" "$MARKETPLACE_CLONE/"
+  echo "    synced."
 else
   echo "    !! marketplace clone not found at $MARKETPLACE_CLONE — skipping."
 fi
 
-# --- Step 5: Clear stale plugin caches ---
+# --- Step 3: Clear plugin cache ---
 if [ -d "$PLUGIN_CACHE" ]; then
-  echo "==> Clearing plugin cache at $PLUGIN_CACHE..."
+  echo "==> Clearing plugin cache..."
   rm -rf "$PLUGIN_CACHE"
-  echo "    cleared. Plugins will re-cache on next install/use."
+  echo "    cleared."
 fi
 
-# --- Step 6: Update installed_plugins.json SHA ---
+# --- Step 4: Update SHA in installed_plugins.json ---
 if [ -f "$INSTALLED_PLUGINS" ]; then
-  echo "==> Updating gitCommitSha in installed_plugins.json..."
-  if command -v python3 &>/dev/null; then
-    python3 -c "
+  LOCAL_SHA=$(git rev-parse HEAD 2>/dev/null || echo "local")
+  echo "==> Updating installed_plugins.json (sha: $LOCAL_SHA)..."
+  python3 -c "
 import json, sys
-path = sys.argv[1]
-sha = sys.argv[2]
+path, sha = sys.argv[1], sys.argv[2]
 with open(path) as f:
     data = json.load(f)
-updated = 0
+n = 0
 for key, entries in data.get('plugins', {}).items():
     if '@grimoire-cc-mmz' not in key:
         continue
-    for entry in entries:
-        entry['gitCommitSha'] = sha
-        updated += 1
+    for e in entries:
+        e['gitCommitSha'] = sha
+        n += 1
 with open(path, 'w') as f:
     json.dump(data, f, indent=2)
     f.write('\n')
-print(f'    updated {updated} entries to {sha}')
-" "$INSTALLED_PLUGINS" "$NEW_SHA"
-  else
-    echo "    !! python3 not found — skipping SHA update."
-  fi
+print(f'    updated {n} entries.')
+" "$INSTALLED_PLUGINS" "$LOCAL_SHA"
 fi
 
 echo ""
-echo "==> Done. Restart Claude Code to pick up the changes."
+echo "==> Done. Restart Claude Code to pick up changes."
