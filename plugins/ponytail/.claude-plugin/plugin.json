@@ -1,0 +1,6 @@
+{
+  "name": "ponytail",
+  "version": "1.0.0",
+  "description": "Laziest-senior-dev coding discipline — YAGNI ladder, stdlib-first, native-platform-first, shortest working diff. Forces minimal code without cutting safety, validation, or accessibility.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}

@@ -60,6 +60,13 @@
       "category": "development"
     },
     {
+      "name": "ponytail",
+      "source": "./plugins/ponytail",
+      "description": "Laziest-senior-dev coding discipline — YAGNI ladder, stdlib-first, native-platform-first, shortest working diff. Forces minimal code without cutting safety, validation, or accessibility.",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
       "name": "ux-design",
       "source": "./plugins/ux-design",
       "description": "UI/UX design intelligence for web and mobile — accessibility, layout, typography, components, and data visualization.",
