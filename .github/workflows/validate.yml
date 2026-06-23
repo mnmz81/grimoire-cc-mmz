@@ -22,7 +22,7 @@ jobs:
       - name: Shellcheck vendored scripts
         run: |
           sudo apt-get update -y && sudo apt-get install -y shellcheck
-          shellcheck plugins/bug-hunting/scripts/open-audit-issues.sh
+          shellcheck plugins/debugging/scripts/open-audit-issues.sh plugins/repo-init/scripts/repo-init.sh
 
       # `claude plugin validate` runs when the CLI is available in CI; the catalog
       # drift gate above is the always-on check that needs no external tooling.

@@ -1,6 +1,0 @@
-{
-  "name": "bug-hunting",
-  "version": "1.0.0",
-  "description": "Whole-repo bug sweeps and systematic debugging — a fan-out of read-only hunters plus a root-cause debugger.",
-  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
-}

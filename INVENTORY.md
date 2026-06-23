@@ -2,7 +2,7 @@
 
 Phase 1 collected 21 skills + 36 agents (lossless). Phase 2 grouped the **shippable** assets — 21 skills + the 10 valid generated hunter agents — into domain plugins under `plugins/`. The 26 `team/agents/*.agent.md` files are non-standard Studio *build sources* (not valid Claude Code agents) and were **dropped from the plugins**; they remain in git history.
 
-> **Current layout is the generated "Domains → plugins" table at the bottom** (run `scripts/generate-catalog.py`). A later restructure consolidated the three split Studio plugins (`component-design`, `component-quality`, `studio-ops`) into one workflow-aligned **`mushilu-studio`** plugin, moved the read-only review/audit stages (palette, staff, sentinel-a11y, gauge) into its `agents/`, and split `sleuth` into its own **`debugging`** plugin. The **Came-from / Now-at** provenance table below is **historical** — its "Now at" column records the original Phase-2 grouping, not the post-restructure paths.
+> **Current layout is the generated "Domains → plugins" table at the bottom** (run `scripts/generate-catalog.py`). A later restructure consolidated the three split Studio plugins (`component-design`, `component-quality`, `studio-ops`) into one workflow-aligned **`mushilu-studio`** plugin, moved the read-only review/audit stages (palette, staff, sentinel-a11y, gauge) into its `agents/`, and split `sleuth` into its own **`debugging`** plugin. A further **R9** consolidation merged the single-skill discipline plugins (`ai-coding-discipline`, `ponytail`, `my-caveman`) into one **`coding-style`** plugin and folded **`bug-hunting`** (hunt skill + 10 hunter agents) into the **`debugging`** plugin — 10 plugins down to 7; skill names and SKILL.md frontmatter were left unchanged, so per-skill triggering is unaffected. The **Came-from / Now-at** provenance table below is **historical** — its "Now at" column records the original Phase-2 grouping, not the post-restructure paths.
 
 | Type | Name | Domain | Came-from | Now at |
 | ---- | ---- | ------ | --------- | ------ |
@@ -70,17 +70,15 @@ Phase 1 collected 21 skills + 36 agents (lossless). Phase 2 grouped the **shippa
 
 | Plugin | Skills | Agents |
 | ------ | ------ | ------ |
-| `ai-coding-discipline` | karpathy-guidelines | — |
-| `bug-hunting` | hunt | hunt-cipher, hunt-drift, hunt-echo, hunt-hollow, hunt-lattice, hunt-ledger, hunt-prism, hunt-specter, hunt-tripwire, hunt-vapor |
 | `code-review` | code-review | — |
-| `debugging` | sleuth | — |
+| `coding-style` | caveman, karpathy-guidelines, ponytail | — |
+| `debugging` | hunt, sleuth | hunt-cipher, hunt-drift, hunt-echo, hunt-hollow, hunt-lattice, hunt-ledger, hunt-prism, hunt-specter, hunt-tripwire, hunt-vapor |
 | `mushilu-studio` | blueprint, compass, conductor, curator, foreman, marshal, prowler, quartermaster, scribe, warden | gauge, palette, sentinel-a11y, staff |
-| `my-caveman` | caveman | — |
-| `ponytail` | ponytail | — |
+| `repo-init` | repo-init | — |
 | `skill-authoring` | skill-qa-agent | — |
 | `ux-design` | ui-ux-design | — |
 
-_9 plugins. This table is generated — run `scripts/generate-catalog.py`._
+_7 plugins. This table is generated — run `scripts/generate-catalog.py`._
 
 <!-- END GENERATED: domains -->
 

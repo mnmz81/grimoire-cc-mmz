@@ -11,20 +11,6 @@
   },
   "plugins": [
     {
-      "name": "ai-coding-discipline",
-      "source": "./plugins/ai-coding-discipline",
-      "description": "Behavioral guidelines that reduce common LLM coding mistakes — surgical changes and fewer overcomplications.",
-      "version": "1.0.0",
-      "category": "development"
-    },
-    {
-      "name": "bug-hunting",
-      "source": "./plugins/bug-hunting",
-      "description": "Whole-repo bug sweeps and systematic debugging — a fan-out of read-only hunters plus a root-cause debugger.",
-      "version": "1.0.0",
-      "category": "development"
-    },
-    {
       "name": "code-review",
       "source": "./plugins/code-review",
       "description": "Thorough JavaScript/TypeScript/Python code review across bugs, security, and performance.",
@@ -32,9 +18,16 @@
       "category": "development"
     },
     {
+      "name": "coding-style",
+      "source": "./plugins/coding-style",
+      "description": "Coding-style and output discipline — Karpathy LLM-mistake guardrails (surgical changes, no overcomplication), laziest-senior-dev minimalism (ponytail: YAGNI, stdlib-first, shortest working diff), and caveman output compression. Skills: karpathy-guidelines, ponytail, caveman.",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
       "name": "debugging",
       "source": "./plugins/debugging",
-      "description": "Systematic, root-cause-first debugging discipline for any codebase — investigate before editing, one hypothesis at a time, stop after three failed fixes.",
+      "description": "Debugging discipline plus whole-repo bug sweeps — systematic root-cause-first fixing (sleuth: investigate before editing, one hypothesis at a time, stop after three failed fixes) and a fan-out of read-only hunters (hunt + 10 hunter agents) that surface bugs across an entire codebase. Skills: sleuth, hunt.",
       "version": "1.0.0",
       "category": "development"
     },
@@ -46,9 +39,9 @@
       "category": "development"
     },
     {
-      "name": "my-caveman",
-      "source": "./plugins/my-caveman",
-      "description": "Caveman output compression — terse, telegraphic replies that cut output tokens while keeping full technical accuracy. Modes: lite, full, ultra, wenyan.",
+      "name": "repo-init",
+      "source": "./plugins/repo-init",
+      "description": "Bootstrap a GitHub repository with enterprise-grade defaults — branch protection (no direct push to main, require PR + N approvals, dismiss stale reviews), required CI status checks, squash-merge linear history, secret scanning, Dependabot alerts, and auto-delete of merged branches.",
       "version": "1.0.0",
       "category": "development"
     },
@@ -56,13 +49,6 @@
       "name": "skill-authoring",
       "source": "./plugins/skill-authoring",
       "description": "Audit, grade, and improve Claude Code skills and Cursor rules, and resolve overlap between them.",
-      "version": "1.0.0",
-      "category": "development"
-    },
-    {
-      "name": "ponytail",
-      "source": "./plugins/ponytail",
-      "description": "Laziest-senior-dev coding discipline — YAGNI ladder, stdlib-first, native-platform-first, shortest working diff. Forces minimal code without cutting safety, validation, or accessibility.",
       "version": "1.0.0",
       "category": "development"
     },

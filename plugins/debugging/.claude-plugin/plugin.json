@@ -1,6 +1,6 @@
 {
   "name": "debugging",
   "version": "1.0.0",
-  "description": "Systematic, root-cause-first debugging discipline for any codebase — investigate before editing, one hypothesis at a time, stop after three failed fixes.",
+  "description": "Debugging discipline plus whole-repo bug sweeps — systematic root-cause-first fixing (sleuth: investigate before editing, one hypothesis at a time, stop after three failed fixes) and a fan-out of read-only hunters (hunt + 10 hunter agents) that surface bugs across an entire codebase. Skills: sleuth, hunt.",
   "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
 }

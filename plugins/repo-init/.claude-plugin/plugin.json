@@ -1,0 +1,6 @@
+{
+  "name": "repo-init",
+  "version": "1.0.0",
+  "description": "Bootstrap a GitHub repository with enterprise-grade defaults — branch protection (no direct push to main, require PR + N approvals, dismiss stale reviews), required CI status checks, squash-merge linear history, secret scanning, Dependabot alerts, and auto-delete of merged branches.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}

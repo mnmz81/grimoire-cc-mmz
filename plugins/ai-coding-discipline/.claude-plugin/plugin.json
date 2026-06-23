@@ -1,6 +1,0 @@
-{
-  "name": "ai-coding-discipline",
-  "version": "1.0.0",
-  "description": "Behavioral guidelines that reduce common LLM coding mistakes — surgical changes and fewer overcomplications.",
-  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
-}

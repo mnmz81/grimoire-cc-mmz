@@ -1,0 +1,6 @@
+{
+  "name": "coding-style",
+  "version": "1.0.0",
+  "description": "Coding-style and output discipline — Karpathy LLM-mistake guardrails (surgical changes, no overcomplication), laziest-senior-dev minimalism (ponytail: YAGNI, stdlib-first, shortest working diff), and caveman output compression. Skills: karpathy-guidelines, ponytail, caveman.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}
