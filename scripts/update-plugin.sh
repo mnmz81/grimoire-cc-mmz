@@ -15,6 +15,8 @@ REQUIRED_BRANCH="main"
 MARKETPLACE_CLONE="$HOME/.claude/plugins/marketplaces/grimoire-cc-mmz"
 PLUGIN_CACHE="$HOME/.claude/plugins/cache/grimoire-cc-mmz"
 INSTALLED_PLUGINS="$HOME/.claude/plugins/installed_plugins.json"
+CATALOG_CACHE="$HOME/.claude/plugins/plugin-catalog-cache.json"
+MARKETPLACE="$ROOT/.claude-plugin/marketplace.json"
 
 # --- Branch guard ---
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -74,5 +76,36 @@ print(f'    updated {n} entries.')
 " "$INSTALLED_PLUGINS" "$LOCAL_SHA"
 fi
 
+# --- Step 5: Prune orphaned installed entries ---
+# After a consolidation, installed_plugins.json can still list @grimoire-cc-mmz
+# plugins that no longer exist in the marketplace (e.g. bug-hunting after it was
+# folded into debugging). Those orphans error on load, so drop any whose name is
+# not in the current marketplace.json.
+if [ -f "$INSTALLED_PLUGINS" ]; then
+  echo "==> Pruning orphaned installed entries..."
+  python3 -c "
+import json, sys
+installed_path, marketplace_path = sys.argv[1], sys.argv[2]
+valid = {p['name'] for p in json.load(open(marketplace_path))['plugins']}
+data = json.load(open(installed_path))
+removed = []
+for key in list(data.get('plugins', {})):
+    if key.endswith('@grimoire-cc-mmz') and key.split('@', 1)[0] not in valid:
+        del data['plugins'][key]; removed.append(key)
+json.dump(data, open(installed_path, 'w'), indent=2); open(installed_path, 'a').write('\n')
+print('    removed: ' + (', '.join(removed) if removed else 'none'))
+" "$INSTALLED_PLUGINS" "$MARKETPLACE"
+fi
+
+# --- Step 6: Invalidate the catalog cache ---
+# /plugin reads plugin-catalog-cache.json, not the marketplace clone. Without
+# clearing it, newly added plugins are reported "not found in marketplace" until
+# the cache is rebuilt. Removing it forces a rebuild on next launch.
+if [ -f "$CATALOG_CACHE" ]; then
+  echo "==> Invalidating catalog cache..."
+  rm -f "$CATALOG_CACHE"
+  echo "    cleared (rebuilds on next launch)."
+fi
+
 echo ""
-echo "==> Done. Restart Claude Code to pick up changes."
+echo "==> Done. Restart Claude Code, then: /plugin install <name>@grimoire-cc-mmz"
