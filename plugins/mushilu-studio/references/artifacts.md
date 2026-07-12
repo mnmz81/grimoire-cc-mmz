@@ -43,7 +43,7 @@ name is configurable (`teamDir` in `.studio/config.json`, default `.mui-team`); 
 
 Review and audit reports use one finding per line so the dashboard and Quartermaster can parse
 them without re-reading prose. This is the same shape the bug-hunt squad uses
-(`bug-hunting/references/hunter-core.md`); keep them aligned:
+(`debugging/references/hunter-core.md`); keep them aligned:
 
 ```
 <verdict> | <area>:<file>:<line> | <title> | <fix>

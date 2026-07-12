@@ -6,6 +6,7 @@ This script derives, from those manifests + folder contents:
 
   * .claude-plugin/marketplace.json   (name, source, description, version, category)
   * the "Domains -> plugins" table in INVENTORY.md (between GENERATED markers)
+  * the "Domains" table in README.md (between GENERATED markers)
 
 This removes the old drift class where marketplace.json and INVENTORY.md were hand-edited
 and fell out of sync with the actual plugins (e.g. a missing my-caveman, an 8-vs-9 count).
@@ -25,6 +26,7 @@ ROOT = Path(__file__).resolve().parent.parent
 PLUGINS_DIR = ROOT / "plugins"
 MARKETPLACE = ROOT / ".claude-plugin" / "marketplace.json"
 INVENTORY = ROOT / "INVENTORY.md"
+README = ROOT / "README.md"
 
 OWNER = {"name": "Moris Zakay", "email": "moriszakay42@gmail.com", "url": "https://github.com/mnmz81"}
 METADATA = {"description": "Personal skills & agents, organized by domain.", "version": "1.0.0"}
@@ -32,6 +34,9 @@ DEFAULT_CATEGORY = "development"
 
 DOMAINS_BEGIN = "<!-- BEGIN GENERATED: domains (scripts/generate-catalog.py) -->"
 DOMAINS_END = "<!-- END GENERATED: domains -->"
+
+README_BEGIN = "<!-- BEGIN GENERATED: readme-domains (scripts/generate-catalog.py) -->"
+README_END = "<!-- END GENERATED: readme-domains -->"
 
 
 def load_plugins() -> list[dict]:
@@ -92,11 +97,24 @@ def build_domains_table(plugins: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def splice_inventory(text: str, table: str) -> str:
+def build_readme_table(plugins: list[dict]) -> str:
+    lines = [
+        README_BEGIN,
+        "",
+        "| Plugin | What it covers |",
+        "| ------ | -------------- |",
+    ]
+    for p in plugins:
+        lines.append(f"| `{p['name']}` | {p['description']} |")
+    lines += ["", README_END]
+    return "\n".join(lines)
+
+
+def splice_block(text: str, begin: str, end: str, table: str) -> str:
     """Replace the marked block, or append it if the markers are absent yet."""
-    if DOMAINS_BEGIN in text and DOMAINS_END in text:
+    if begin in text and end in text:
         return re.sub(
-            re.escape(DOMAINS_BEGIN) + r".*?" + re.escape(DOMAINS_END),
+            re.escape(begin) + r".*?" + re.escape(end),
             table,
             text,
             flags=re.DOTALL,
@@ -113,7 +131,9 @@ def main() -> int:
 
     marketplace = build_marketplace(plugins)
     inventory_text = INVENTORY.read_text(encoding="utf-8") if INVENTORY.exists() else ""
-    new_inventory = splice_inventory(inventory_text, build_domains_table(plugins))
+    new_inventory = splice_block(inventory_text, DOMAINS_BEGIN, DOMAINS_END, build_domains_table(plugins))
+    readme_text = README.read_text(encoding="utf-8") if README.exists() else ""
+    new_readme = splice_block(readme_text, README_BEGIN, README_END, build_readme_table(plugins))
 
     if check:
         drift = []
@@ -127,6 +147,8 @@ def main() -> int:
                 drift.append(f"{p['name']}: version mismatch")
         if new_inventory != inventory_text:
             drift.append("INVENTORY.md domains table out of sync")
+        if new_readme != readme_text:
+            drift.append("README.md domains table out of sync")
         if drift:
             print("CATALOG DRIFT:\n  - " + "\n  - ".join(drift), file=sys.stderr)
             print("Run: scripts/generate-catalog.py", file=sys.stderr)
@@ -138,7 +160,9 @@ def main() -> int:
     MARKETPLACE.write_text(marketplace, encoding="utf-8")
     if INVENTORY.exists():
         INVENTORY.write_text(new_inventory, encoding="utf-8")
-    print(f"wrote marketplace.json ({len(plugins)} plugins) and INVENTORY domains table")
+    if README.exists():
+        README.write_text(new_readme, encoding="utf-8")
+    print(f"wrote marketplace.json ({len(plugins)} plugins), INVENTORY domains table, and README domains table")
     return 0
 
 
