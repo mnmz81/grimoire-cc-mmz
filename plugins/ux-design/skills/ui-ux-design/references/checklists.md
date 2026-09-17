@@ -7,6 +7,7 @@ Run before considering any UI/UX task complete. Every unchecked item is a regres
 - [ ] All icons from a consistent icon family and style
 - [ ] Semantic theme tokens used consistently (no ad-hoc hardcoded colors)
 - [ ] Pressed-state visuals do not shift layout bounds or cause jitter
+- [ ] Scanned against generic AI-design tells (Section 11 of SKILL.md) — no default Inter, no purple-to-blue gradient, no nested cards, no gray-on-color text
 
 ## Interaction
 - [ ] All tappable elements provide clear pressed feedback
