@@ -37,7 +37,7 @@ build` directly and note no script was present).
   framework-specific rule (`@Input` decorators, `NgZone`, `ViewEncapsulation`, signal APIs) and
   apply the underlying principle instead — no XSS sink, no un-memoized hot-path work, visible
   focus ring, ≥`touchTargetPx` targets, token discipline against `tokenPrefix`. The
-  bug-hunt squad already states this rule in `bug-hunting/references/hunter-core.md`; the Studio
+  bug-hunt squad already states this rule in `debugging/references/hunter-core.md`; the Studio
   follows the same convention so the two stay consistent.
 - **Paths come from config, not literals.** Read `scanRoot`/`teamDir` rather than assuming
   `src/` and `.mui-team/`. The grep examples in each stage use `src/` only as an illustration.

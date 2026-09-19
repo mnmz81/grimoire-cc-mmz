@@ -37,6 +37,7 @@ Comprehensive design guide for web and mobile. Apply whenever a task changes how
 | 8 | Forms & Feedback | MEDIUM |
 | 9 | Navigation Patterns | HIGH |
 | 10 | Charts & Data | LOW |
+| 11 | Avoiding Generic AI-Design Tells | HIGH |
 
 ---
 
@@ -243,6 +244,22 @@ When rules from different categories conflict, use this tie-breaker order:
 - Data lines/bars vs background ≥3:1; data text labels ≥4.5:1
 - Interactive chart elements must be keyboard-navigable
 - Provide a text summary or `aria-label` describing the chart's key insight for screen readers
+
+## 11. Avoiding Generic AI-Design Tells (HIGH)
+
+*Every model trained on the same corpus of SaaS templates converges on the same handful of tells. A design that leans on any of these reads as machine-generated even when the layout is otherwise sound.*
+
+- Don't default to Inter (or another ubiquitous grotesque) for every project — pick a typeface that matches the product's personality, or justify the default explicitly
+- Don't reach for a purple-to-blue gradient as the default hero/CTA treatment — it is the single most recognizable "AI startup" tell
+- Don't nest cards inside cards — a bordered/shadowed container inside another bordered/shadowed container adds visual noise without adding structure
+- Don't place gray or low-contrast text on a colored/gradient background — it fails contrast and reads as an afterthought
+- Don't put the same rounded-square icon tile above every heading/feature block — it is decoration, not information, when applied uniformly
+- Don't use bounce or elastic easing on UI transitions — it reads as a toy, not a product; use `ease-out`/`ease-in` per Section 7
+- Don't apply a drop-shadow to every surface by default — reserve elevation for elements that are actually meant to float above content
+- Don't ship the same "headline + subhead + two CTAs" hero pattern without adapting it to the product's actual audience and message
+- Don't use pure black (`#000`) or pure gray (`#808080`) — tint neutrals toward the brand hue so the palette feels considered rather than default
+- Don't fill empty space with generic decorative blobs/grids/dot-patterns that carry no meaning — empty space is not a bug
+- Before delivery, name the one or two specific reference points (a product, a design system, an era) this design is drawing from — if none exist, the design defaulted to the training-data average
 
 ---
 

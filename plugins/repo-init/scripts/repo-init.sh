@@ -60,12 +60,10 @@ if [[ "$REPO_NAME" == */* ]]; then
   OWNER="${REPO_NAME%%/*}"
   REPO="${REPO_NAME##*/}"
   FULL_NAME="$REPO_NAME"
-  ORG_FLAG="--org $OWNER"
 else
   OWNER="$(gh api user --jq '.login' 2>/dev/null)" || fail "Cannot determine GitHub username. Run: gh auth login"
   REPO="$REPO_NAME"
   FULL_NAME="$OWNER/$REPO"
-  ORG_FLAG=""
 fi
 
 # ─── Preflight ────────────────────────────────────────────────────────────────
@@ -99,7 +97,6 @@ gh_api() {
     if gh api --method "$method" "$endpoint" "$@" 2>/dev/null; then
       return 0
     fi
-    local exit_code=$?
     attempt=$((attempt + 1))
     if (( attempt < max_retries )); then
       warn "API call failed (attempt $attempt/$max_retries), retrying in $((attempt * 2))s..."
@@ -208,9 +205,11 @@ if $DRY_RUN; then
   echo "  PATCH /repos/$FULL_NAME → security_and_analysis.secret_scanning.status=enabled"
 else
   # Dependabot vulnerability alerts
-  gh_api PUT "/repos/$FULL_NAME/vulnerability-alerts" 2>/dev/null \
-    && ok "Dependabot vulnerability alerts enabled" \
-    || warn "Dependabot alerts may not be available on this plan."
+  if gh_api PUT "/repos/$FULL_NAME/vulnerability-alerts" 2>/dev/null; then
+    ok "Dependabot vulnerability alerts enabled"
+  else
+    warn "Dependabot alerts may not be available on this plan."
+  fi
 
   # Secret scanning
   SECURITY_PAYLOAD='{
@@ -219,9 +218,11 @@ else
       "secret_scanning_push_protection": { "status": "enabled" }
     }
   }'
-  echo "$SECURITY_PAYLOAD" | gh_api PATCH "/repos/$FULL_NAME" --input - 2>/dev/null \
-    && ok "Secret scanning + push protection enabled" \
-    || warn "Secret scanning may require GitHub Advanced Security (available on public repos or GHAS license)."
+  if echo "$SECURITY_PAYLOAD" | gh_api PATCH "/repos/$FULL_NAME" --input - 2>/dev/null; then
+    ok "Secret scanning + push protection enabled"
+  else
+    warn "Secret scanning may require GitHub Advanced Security (available on public repos or GHAS license)."
+  fi
 fi
 
 # ═══════════════════════════════════════════════════════════════════════════════
