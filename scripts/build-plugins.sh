@@ -5,7 +5,8 @@
 # It has already run; the plugins/ tree is now the source of truth. Do NOT re-run it:
 # its hardcoded DOMAINS list is frozen at migration time (it still lists the dropped
 # `code-intelligence`/graphify and predates `my-caveman`) and it expects the old flat
-# layout that no longer exists. Kept only for provenance.
+# layout that no longer exists. Kept only for provenance. Its `code-review` entry
+# predates the rename to `triple-lens-review` (PR #9).
 #
 # To regenerate marketplace.json + the INVENTORY domains table from the current
 # plugin.json manifests, use the maintained generator instead:
@@ -14,6 +15,9 @@
 #
 # Usage: scripts/build-plugins.sh   (historical; see note above)
 set -euo pipefail
+
+echo "build-plugins.sh is historical and must not be re-run; use scripts/generate-catalog.py" >&2
+exit 1
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
