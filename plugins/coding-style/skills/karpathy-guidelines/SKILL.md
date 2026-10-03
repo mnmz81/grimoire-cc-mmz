@@ -1,6 +1,7 @@
 ---
 name: karpathy-guidelines
 description: Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgical changes, surface assumptions, and define verifiable success criteria.
+allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 # Karpathy Guidelines
@@ -19,7 +20,7 @@ use judgment.
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
 
 Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
+- State your assumptions explicitly.
 - If multiple interpretations exist, present them - don't pick silently.
 - If a simpler approach exists, say so. Push back when warranted.
 - If ambiguity would change the result, stop and ask. Otherwise pick the sensible default, state it in one line, and proceed.
