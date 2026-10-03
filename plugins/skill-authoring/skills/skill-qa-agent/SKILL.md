@@ -41,7 +41,7 @@ When an action is irreversible or risky, write the confirmation request in plain
 All stdlib-only, cross-platform (Windows/macOS/Linux), run from this skill dir as `python -m scripts.<name>`. Use whichever of `python` / `python3` resolves to Python 3.10+ — try one, fall back to the other.
 
 - `lint_skill.py --format {skill|mdc} <path>` → Tier 1 JSON.
-- `inventory.py [--project-roots ...] [--changed-since-last-audit] [--out P]` → `skill-index.json`.
+- `inventory.py [--project-roots ...] [--skill-roots ...] [--changed-since-last-audit] [--out P]` → `skill-index.json`; `--skill-roots` scans a repo's `*/SKILL.md` and `plugins/*/skills/*/SKILL.md`.
 - `similarity.py --index <skill-index.json> [--threshold 0.30] [--out P]` → `candidate-pairs.json`.
 - `score_judge.py` → headless Tier 2/3 via `claude -p` (scheduled audit only).
 - `install_schedule.py [--time 03:00] [--day SUN] [--remove] [--dry-run]` → weekly audit job (Task Scheduler on Windows, crontab on macOS/Linux).
