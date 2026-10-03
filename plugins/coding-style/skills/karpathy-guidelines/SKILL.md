@@ -1,7 +1,6 @@
 ---
 name: karpathy-guidelines
 description: Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgical changes, surface assumptions, and define verifiable success criteria.
-allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
 # Karpathy Guidelines
@@ -13,6 +12,8 @@ instructions as needed.
 **Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks,
 use judgment.
 
+**With ponytail active:** ponytail decides *how much* to build; these rules decide *how carefully*. Both share one rule: ask only when the ambiguity is blocking.
+
 ## 1. Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
@@ -21,7 +22,7 @@ Before implementing:
 - State your assumptions explicitly. If uncertain, ask.
 - If multiple interpretations exist, present them - don't pick silently.
 - If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
+- If ambiguity would change the result, stop and ask. Otherwise pick the sensible default, state it in one line, and proceed.
 
 ## 2. Simplicity First
 

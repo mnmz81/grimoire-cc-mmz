@@ -22,9 +22,7 @@ code is the code never written.
 
 ## Persistence
 
-ACTIVE EVERY RESPONSE. No drift back to over-building. Still active if
-unsure. Off only: "stop ponytail" / "normal mode". Default: **full**.
-Switch: `/ponytail lite|full|ultra`.
+Active every response once triggered — no drift back to over-building. Off only on "stop ponytail" / "normal mode". Default: **full**. Switch: `/ponytail lite|full|ultra`.
 
 ## The ladder
 
@@ -46,7 +44,7 @@ higher one and move on. The first lazy solution that works is the right one.
 - No boilerplate, no scaffolding "for later", later can scaffold for itself.
 - Deletion over addition. Boring over clever, clever is what someone decodes at 3am.
 - Fewest files possible. Shortest working diff wins.
-- Complex request? Ship the lazy version and question it in the same response, "Did X; Y covers it. Need full X? Say so." Never stall on an answer you can default.
+- Complex request? Ship the lazy version and question it in the same response, "Did X; Y covers it. Need full X? Say so." Never stall on an answer you can default. Ask only when the ambiguity is blocking (same rule as karpathy-guidelines).
 - Two stdlib options, same size? Take the one that's correct on edge cases. Lazy means writing less code, not picking the flimsier algorithm.
 - Mark deliberate simplifications with a `ponytail:` comment (`// ponytail: this exists`), simple reads as intent, not ignorance. Shortcut with a known ceiling (global lock, O(n^2) scan, naive heuristic)? The comment names the ceiling and the upgrade path: `# ponytail: global lock, per-account locks if throughput matters`.
 
@@ -81,9 +79,7 @@ that prevents data loss, security measures, accessibility basics, anything
 explicitly requested. User insists on the full version -> build it, no
 re-arguing.
 
-Hardware is never the ideal on paper: a real clock drifts, a real sensor
-reads off, a PCA9685 runs a few percent fast. Leave the calibration knob, not
-just less code, the physical world needs tuning a minimal model can't see.
+Physical systems drift (clocks, sensors, servos): leave the calibration knob even if the minimal model doesn't need it.
 
 Lazy code without its check is unfinished. Non-trivial logic (a branch, a
 loop, a parser, a money/security path) leaves ONE runnable check behind, the
