@@ -8,6 +8,7 @@ repo root; <repo>/.cursor/rules/*.mdc is scanned). Default: no project roots.
 
 Usage:
     python -m scripts.inventory [--project-roots PATH ...]
+                                [--skill-roots PATH ...]
                                 [--changed-since-last-audit] [--out PATH]
 
 Outputs JSON to stdout (and to --out if given). Windows-friendly.
@@ -94,7 +95,7 @@ def _mdc_item(mdc_path: Path, tree: str) -> dict | None:
     }
 
 
-def scan(project_roots: list[Path]) -> list[dict]:
+def scan(project_roots: list[Path], skill_roots: list[Path] | None = None) -> list[dict]:
     items: list[dict] = []
 
     skills_dir = claude_skills_dir()
@@ -120,6 +121,13 @@ def scan(project_roots: list[Path]) -> list[dict]:
                 item = _mdc_item(mdc, tree)
                 if item:
                     items.append(item)
+
+    for root in skill_roots or []:
+        for skill_md in sorted(set(root.glob("*/SKILL.md")) | set(root.glob("plugins/*/skills/*/SKILL.md"))):
+            item = _skill_item(skill_md.parent)
+            if item:
+                item["tree"] = "skill-root"
+                items.append(item)
 
     return items
 
@@ -155,10 +163,13 @@ def compute_changed(items: list[dict], prev: dict | None) -> dict:
     }
 
 
-def build_index(project_roots: list[Path], changed_since: bool) -> dict:
-    items = scan(project_roots)
+def build_index(project_roots: list[Path], changed_since: bool,
+                skill_roots: list[Path] | None = None) -> dict:
+    skill_roots = skill_roots or []
+    items = scan(project_roots, skill_roots)
     roots = [str(claude_skills_dir()), str(cursor_rules_dir())]
     roots += [str(r / ".cursor" / "rules") for r in project_roots]
+    roots += [str(r) for r in skill_roots]
 
     changed_block = None
     if changed_since:
@@ -179,13 +190,16 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Scan skill/rule trees into skill-index.json.")
     parser.add_argument("--project-roots", nargs="*", default=[],
                         help="Repo roots to also scan for <repo>/.cursor/rules/*.mdc")
+    parser.add_argument("--skill-roots", nargs="*", default=[],
+                        help="Repo roots to scan for */SKILL.md and plugins/*/skills/*/SKILL.md")
     parser.add_argument("--changed-since-last-audit", action="store_true",
                         help="Limit output to items changed since the previous audit")
     parser.add_argument("--out", default=None, help="Also write JSON to this path")
     args = parser.parse_args(argv)
 
-    roots = [Path(r).expanduser() for r in args.project_roots]
-    index = build_index(roots, args.changed_since_last_audit)
+    roots = [Path(r).expanduser().resolve() for r in args.project_roots]
+    skill_roots = [Path(r).expanduser().resolve() for r in args.skill_roots]
+    index = build_index(roots, args.changed_since_last_audit, skill_roots)
     payload = json.dumps(index, indent=2, ensure_ascii=False)
     print(payload)
     if args.out:

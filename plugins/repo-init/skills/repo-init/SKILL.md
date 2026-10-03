@@ -85,7 +85,7 @@ Via GitHub REST API (`gh api`):
 
 ### Phase 3 — Branch protection on `main`
 Applies branch protection ruleset via REST API:
-- `required_pull_request_reviews`: min 1 approval, dismiss stale approvals, require review from code owners (if CODEOWNERS file exists)
+- `required_pull_request_reviews`: min 1 approval, dismiss stale approvals, code-owner review off (a new repo has no CODEOWNERS; enable `require_code_owner_reviews` after adding one)
 - `required_status_checks`: strict mode (branch must be up-to-date), contexts from `--required-checks`
 - `enforce_admins`: true (admins also bound by rules)
 - `restrictions`: null (no push restrictions beyond requiring PR)

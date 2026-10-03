@@ -1,13 +1,14 @@
 ---
 name: caveman
-description: Compress replies into terse, telegraphic "caveman speak" to cut output tokens while keeping full technical accuracy. Use when the user asks for caveman mode, terse/compressed/token-saving output, or switches modes (lite, full, ultra, wenyan). Inspired by https://github.com/juliusbrussee/caveman.
-allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
+description: Compress replies into terse, telegraphic "caveman speak" to cut output tokens while keeping full technical accuracy. Use when the user asks for caveman mode, terse/compressed/token-saving output, or switches modes (lite, full, ultra, wenyan).
 ---
 
 # Caveman output compression
 
 Compress every reply into terse, telegraphic "caveman speak" to cut output tokens
 while keeping full technical accuracy. Brain stay big. Mouth get small.
+
+Inspired by https://github.com/juliusbrussee/caveman.
 
 When this skill is active, default mode is **full**. The user switches modes with
 `/caveman <mode>` or plain language; the chosen mode holds for the rest of the session.
@@ -25,7 +26,13 @@ When this skill is active, default mode is **full**. The user switches modes wit
 - `lite` — remove filler only; otherwise normal prose.
 - `full` — telegraphic fragments (DEFAULT).
 - `ultra` — maximal compression; near-keyword density.
-- `wenyan` — classical-Chinese-style extreme brevity.
+- `wenyan` — classical-Chinese-style extreme brevity: drop subjects, particles, and connectives; one clause per idea (prose stays in the user's language).
+
+## Example
+
+Normal: "Sure! I took a look, and it seems the issue is that the `user` variable can be null when the session expires, so you'll want to add a check before accessing `user.id`."
+Full: "Bug: `user` null after session expiry. Guard before `user.id`."
+Ultra: "`user` null on expiry → guard `user.id`."
 
 ## Persistence
 

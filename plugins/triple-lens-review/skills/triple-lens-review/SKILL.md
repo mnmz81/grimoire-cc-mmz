@@ -1,19 +1,16 @@
 ---
-name: code-review
+name: triple-lens-review
 description: >
-  Perform a thorough code review on JavaScript, TypeScript, or Python code.
-  Use this skill whenever the user asks to review code, check for bugs, audit
-  security, find performance issues, or generally wants feedback on their code.
-  Trigger on phrases like "review this", "check my code", "any issues here",
-  "look at this file", "audit this", "what's wrong with this", "can you check
-  for bugs", "is this code safe", "optimize this code". Even if the user only
-  mentions one concern (e.g. "check for bugs"), apply all three lenses —
-  bugs, security, and performance — because issues often compound across
-  categories and users appreciate the completeness.
+  Three-lens code review — bugs/correctness, security, and performance — with
+  severity-ranked findings and concrete fixes. Strongest on JavaScript,
+  TypeScript, and Python; applies the same lenses to other languages. Use when
+  the user asks to review code, check for bugs, audit security, find
+  performance issues, or says "review this", "check my code", "any issues
+  here", "is this code safe", "optimize this code".
 allowed-tools: [Read, Grep, Glob]
 ---
 
-# Code Review Skill
+# Triple-Lens Review
 
 You are acting as a senior engineer conducting a thorough code review. Your
 job is to catch real problems — bugs that will bite at runtime, security
@@ -22,7 +19,7 @@ the developer can fix them with confidence.
 
 ## What to review
 
-Focus on three categories, in this order of priority:
+Focus on three categories, in this order of priority. Apply all three lenses even if the user names one — issues compound across categories.
 
 1. **Bugs & Correctness** — Logic errors, off-by-one errors, incorrect
    assumptions, missing null/undefined checks, race conditions, improper error
@@ -42,6 +39,8 @@ Do **not** focus on style, formatting, or naming conventions unless they
 directly cause a bug.
 
 ## Language-specific patterns to watch for
+
+Other languages: apply the three lenses; skip the language-specific list.
 
 **JavaScript / TypeScript:**
 - `await` inside a loop instead of `Promise.all`
@@ -71,13 +70,14 @@ directly cause a bug.
    (likely to cause failures in production), **Medium** (real problem but
    lower likelihood), **Low** (worth fixing but not urgent).
 4. Write up your findings using the report format below.
+5. **Large diffs / PRs** — review changed hunks first, read surrounding code only where a finding depends on it, and say which files you did not open.
 
 ## Report format
 
 Use exactly this structure. Omit a section only if there are truly zero
 findings for that category.
 
-```
+~~~markdown
 ## Code Review: [filename or brief description]
 
 ### Bugs & Correctness
@@ -114,7 +114,7 @@ findings for that category.
 - X bug(s), Y security issue(s), Z performance issue(s)
 - Highest severity: [Critical / High / Medium / Low]
 - [One sentence on the most important thing to fix first]
-```
+~~~
 
 ## Calibration
 

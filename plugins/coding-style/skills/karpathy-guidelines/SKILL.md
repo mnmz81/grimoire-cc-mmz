@@ -13,15 +13,17 @@ instructions as needed.
 **Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks,
 use judgment.
 
+**With ponytail active:** ponytail decides *how much* to build; these rules decide *how carefully*. Both share one rule: ask only when the ambiguity is blocking.
+
 ## 1. Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
 
 Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
+- State your assumptions explicitly.
 - If multiple interpretations exist, present them - don't pick silently.
 - If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
+- If ambiguity would change the result, stop and ask. Otherwise pick the sensible default, state it in one line, and proceed.
 
 ## 2. Simplicity First
 

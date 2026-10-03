@@ -70,12 +70,12 @@ Phase 1 collected 21 skills + 36 agents (lossless). Phase 2 grouped the **shippa
 
 | Plugin | Skills | Agents |
 | ------ | ------ | ------ |
-| `code-review` | code-review | — |
 | `coding-style` | caveman, karpathy-guidelines, ponytail | — |
 | `debugging` | hunt, sleuth | hunt-cipher, hunt-drift, hunt-echo, hunt-hollow, hunt-lattice, hunt-ledger, hunt-prism, hunt-specter, hunt-tripwire, hunt-vapor |
 | `mushilu-studio` | blueprint, compass, conductor, curator, foreman, marshal, prowler, quartermaster, scribe, warden | gauge, palette, sentinel-a11y, staff |
 | `repo-init` | repo-init | — |
 | `skill-authoring` | skill-qa-agent | — |
+| `triple-lens-review` | triple-lens-review | — |
 | `ux-design` | ui-ux-design | — |
 
 _7 plugins. This table is generated — run `scripts/generate-catalog.py`._

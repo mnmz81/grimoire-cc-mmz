@@ -21,7 +21,7 @@ name is configurable (`teamDir` in `.studio/config.json`, default `.mui-team`); 
   reports/<component>.qa.md           # Prowler   — browser/Storybook QA + regression tests
   reports/<component>.pipeline.md     # Conductor — one-line status dashboard per stage
   release-readiness.md                # Quartermaster — gate checklist, ci-verify result, PR URL
-  learnings.md                        # all stages append; Curator dedupes/graduates
+  learnings.md                        # studio reviewers append; Curator dedupes/graduates (Sleuth/hunt use .bug-hunt/learnings.md)
   freeze                              # Warden marker — a dir path; edits outside it are denied
 ```
 
@@ -36,7 +36,7 @@ name is configurable (`teamDir` in `.studio/config.json`, default `.mui-team`); 
 | `reports/<c>.{test,qa}.md` | Marshal / Prowler | Conductor, Quartermaster |
 | `reports/<c>.pipeline.md` | Conductor | the user (dashboard) |
 | `release-readiness.md` | Quartermaster | the user |
-| `learnings.md` | every reviewer + the hunt squad (append) | Curator |
+| `learnings.md` | every studio reviewer → `.mui-team/learnings.md`; Sleuth and the hunt orchestrator → `.bug-hunt/learnings.md` | Curator (both files) |
 | `freeze` | Warden | the project's PreToolUse freeze hook |
 
 ## Finding-line format (review/audit reports)
