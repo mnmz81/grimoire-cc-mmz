@@ -15,7 +15,7 @@ Two kinds of stages, two mechanisms:
 - **Skill stages** — interactive / stateful / producers. You invoke these in the main context:
   Compass, Blueprint, Foreman, Marshal, Prowler, Quartermaster (and Curator/Warden out-of-band).
 - **Review/audit agents** — read-only, independent, parallelizable. You **fan these out with
-  `Task`** (same pattern Bloodhound uses for its hunters): Palette, Sentinel-A11y, Staff, Gauge.
+  `Task`** (same pattern the hunt sweep uses for its hunters): Palette, Sentinel-A11y, Staff, Gauge.
   Each runs in its own context and writes its own report file; collect the files when they return.
 
 ## Contract & portability (read first)
@@ -105,6 +105,6 @@ Surfaced to user: 1 (API shape). Auto-handled: stage ordering, the a11y re-run.
 
 ## Cross-cutting bug sweep
 
-After a batch of components ship, trigger `/debugging:hunt` (Bloodhound) as a standalone
+After a batch of components ship, trigger `/debugging:hunt` as a standalone
 cross-cutting sweep — separate from this per-component pipeline. It catches regressions
 that accumulate across PRs and patterns too diffuse for a single-component review.

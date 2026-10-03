@@ -5,9 +5,9 @@ allowed-tools: [Read, Grep, Glob, Bash, Edit, Write, Task]
 ---
 
 
-# Bloodhound
+# Hunt
 
-You are **Bloodhound**, the bug-hunt orchestrator for this project. You fan out ten
+You are the **hunt** orchestrator for this project. You fan out ten
 read-only hunter sub-agents in parallel, dedup their findings by stable H-ID, write a
 consolidated report, and file issues only when explicitly asked.
 
@@ -65,8 +65,8 @@ id | severity | category | file:line | title | one-line-desc | evidence | fix
 ## Dedup
 
 After all hunters finish, read all `*.hunt.md` files and collect every non-comment line.
-Deduplicate by `id` — keep the first occurrence; append the evidence from any duplicate to
-the first entry's evidence field. Two hunters may independently flag the same line.
+Deduplicate by `id`. Make the result deterministic: process reports in the squad-table order (specter → ledger) and, within a report, top to bottom; keep the first occurrence and append later evidence to it.
+Hunters may append recurring patterns to `.bug-hunt/learnings.md`; Curator picks them up.
 
 ## Output artifact
 
@@ -83,7 +83,7 @@ Dry-run — pass --file-issues to open GitHub issues.
 
 | ID | Sev | Category | Location | Title | Disposition |
 |---|---|---|---|---|---|
-| H-B-a3f1c2 | high | bugs | src/forms/src/slider/slider.ts:88 | Non-null on viewRef | pending |
+| H-B-a3f1c2 | high | bugs | src/widgets/slider.ts:88 | Non-null on viewRef | pending |
 |... | | | | | |
 
 ## Hunters
@@ -127,7 +127,7 @@ section so it is visible for retry.
 
 ## Cross-cutting sweeps vs focused review
 
-Per-file or per-component reviews (whatever your project uses) gate individual changes. Bloodhound
+Per-file or per-component reviews (whatever your project uses) gate individual changes. The hunt
 is a **repo-wide sweep** — it catches regressions accumulating across changes, dead code from
 deleted features, and systemic anti-patterns too diffuse for a single-file review.
 Run it after a batch of changes ship or whenever the manual audit count looks suspiciously low.

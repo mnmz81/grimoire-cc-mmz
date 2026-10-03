@@ -55,7 +55,7 @@ remains: 4 single-sighting lessons kept for next pass.
 
 ## Hunt-squad findings
 
-Bloodhound (`/debugging:hunt`) and its hunters also append to `.mui-team/learnings.md` with tags
+The hunt sweep (`/debugging:hunt`) and its hunters also append to `.mui-team/learnings.md` with tags
 `#perf`, `#dead-code`, `#dependency`, `#duplication`, `#e2e`. Include these tags in your
 dedup/graduation scope alongside the existing reviewer tags.
 
