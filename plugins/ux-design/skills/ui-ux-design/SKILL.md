@@ -1,6 +1,6 @@
 ---
 name: ui-ux-design
-description: "UI/UX design rules for web and mobile interfaces — accessibility, touch targets, layout, typography, color, motion, forms, navigation, charts, and avoiding generic AI-design tells. Use when building, styling, or reviewing a visual interface (page, component, dashboard, form, chart) in any UI framework. Not for backend, API, or infrastructure work."
+description: "UI/UX design rules for web and mobile interfaces — accessibility, touch targets, layout, typography, color, motion, forms, navigation, charts, and avoiding generic AI-design tells. Use when building, styling, or reviewing a visual interface (page, component, dashboard, form, chart) in any UI framework. For choosing the overall aesthetic direction of a landing page, portfolio, or marketing redesign, prefer design-taste-frontend (taste-skill) and use this skill for the rules and audit. Not for backend, API, or infrastructure work."
 allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 

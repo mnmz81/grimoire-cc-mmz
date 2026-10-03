@@ -46,6 +46,13 @@
       "category": "development"
     },
     {
+      "name": "taste-skill",
+      "source": "./plugins/taste-skill",
+      "description": "Anti-slop frontend design skills vendored from leonxlnx/taste-skill (MIT) — brief-driven design read, VARIANCE/MOTION/DENSITY dials, AI-tell ban list, redesign audit, style presets (soft, minimalist, brutalist, stitch), full-output enforcement, and image-gen reference skills (web, mobile, brandkit).",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
       "name": "triple-lens-review",
       "source": "./plugins/triple-lens-review",
       "description": "Three-lens code review — bugs, security, and performance — strongest on JavaScript/TypeScript/Python, applies to any language.",

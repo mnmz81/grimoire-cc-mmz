@@ -1,0 +1,1 @@
+Legacy v1 of design-taste-frontend, kept only for exact backward compatibility. Use only when the user explicitly asks for taste-skill v1; otherwise use design-taste-frontend.
