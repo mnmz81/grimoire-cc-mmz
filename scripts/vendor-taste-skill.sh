@@ -2,7 +2,11 @@
 # vendor-taste-skill.sh — copy upstream leonxlnx/taste-skill skills into
 # plugins/taste-skill/ (vendored, not installed). Re-run to sync with upstream.
 #
-# Usage: scripts/vendor-taste-skill.sh [git-ref]   # default: main
+# Usage: scripts/vendor-taste-skill.sh [git-ref]   # branch, tag, or full 40-char commit SHA; default: main
+#
+# Upstream is untrusted input: pass a full commit SHA to pin, and review
+# `git diff plugins/taste-skill` before committing. Symlinks and other
+# non-regular files in upstream are rejected.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -13,14 +17,23 @@ DEST="$ROOT/plugins/taste-skill"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
-echo "==> Cloning $REPO@$REF..."
-git clone -q --depth 1 --branch "$REF" "$REPO" "$TMP/src"
+echo "==> Fetching $REPO@$REF..."
+git init -q "$TMP/src"
+git -C "$TMP/src" fetch -q --depth 1 "$REPO" "$REF"
+git -C "$TMP/src" -c advice.detachedHead=false checkout -q FETCH_HEAD
 SHA="$(git -C "$TMP/src" rev-parse HEAD)"
+
+BAD="$(find "$TMP/src/skills" "$TMP/src/LICENSE" ! -type f ! -type d)"
+if [ -n "$BAD" ]; then
+  echo "ERROR: upstream contains symlinks or non-regular files; refusing to vendor:" >&2
+  echo "${BAD//$TMP\/src\//}" >&2
+  exit 1
+fi
 
 echo "==> Syncing skills into $DEST/skills..."
 mkdir -p "$DEST/skills"
-rsync -a --delete --exclude='llms.txt' "$TMP/src/skills/" "$DEST/skills/"
-cp "$TMP/src/LICENSE" "$DEST/LICENSE"
+rsync -r --no-links --delete --exclude='llms.txt' "$TMP/src/skills/" "$DEST/skills/"
+cp -P "$TMP/src/LICENSE" "$DEST/LICENSE"
 
 echo "==> Applying local overrides from $DEST/overrides..."
 python3 - "$DEST" <<'PY'
