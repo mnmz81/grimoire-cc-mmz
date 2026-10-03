@@ -1,6 +1,6 @@
 ---
 name: ui-ux-design
-description: "UI/UX design intelligence for web and mobile. Use when building or reviewing pages, components, dashboards, landing pages, forms, navigation, charts, or any visual interface. Covers accessibility, touch targets, performance, style selection, layout, typography, animation, forms, navigation patterns, and data visualization across React, Next.js, Vue, Svelte, Tailwind, shadcn/ui, React Native, Flutter, SwiftUI, and HTML/CSS."
+description: "UI/UX design rules for web and mobile interfaces — accessibility, touch targets, layout, typography, color, motion, forms, navigation, charts, and avoiding generic AI-design tells. Use when building, styling, or reviewing a visual interface (page, component, dashboard, form, chart) in any UI framework. Not for backend, API, or infrastructure work."
 allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 
@@ -32,12 +32,12 @@ Comprehensive design guide for web and mobile. Apply whenever a task changes how
 | 3 | Performance | HIGH |
 | 4 | Style Selection | HIGH |
 | 5 | Layout & Responsive | HIGH |
-| 6 | Typography & Color | MEDIUM |
-| 7 | Animation | MEDIUM |
-| 8 | Forms & Feedback | MEDIUM |
-| 9 | Navigation Patterns | HIGH |
-| 10 | Charts & Data | LOW |
-| 11 | Avoiding Generic AI-Design Tells | HIGH |
+| 6 | Navigation Patterns | HIGH |
+| 7 | Avoiding Generic AI-Design Tells | HIGH |
+| 8 | Typography & Color | MEDIUM |
+| 9 | Animation | MEDIUM |
+| 10 | Forms & Feedback | MEDIUM |
+| 11 | Charts & Data | LOW |
 
 ---
 
@@ -51,7 +51,7 @@ When rules from different categories conflict, use this tie-breaker order:
 
 **Touch target size beats visual density.** A 44×44pt tap target that looks large on a compact layout is always preferred over a smaller target that "fits" better. Expand hit areas with padding instead of shrinking the target.
 
-**Platform idioms beat cross-platform consistency.** An iOS-style bottom sheet on Android is always wrong, even if it matches the web version. When building cross-platform, implement per-platform variants rather than forcing a single pattern.
+**Platform idioms beat cross-platform consistency.** An iOS-style action sheet on Android (instead of a Material bottom sheet/dialog) breaks expectations, even if it matches the web version. When building cross-platform, implement per-platform variants rather than forcing a single pattern.
 
 **Content legibility beats layout compactness.** If meeting the 60–75 char line-length guideline requires a layout change, make the change. Readable text is non-negotiable.
 
@@ -59,9 +59,20 @@ When rules from different categories conflict, use this tie-breaker order:
 
 ---
 
+## Project design systems win
+
+If the project has its own tokens/design system (e.g. `--mui-*`, a Tailwind theme, a component library), use it. These rules fill gaps and catch violations; they never override an explicit system choice except on accessibility.
+
+## Example
+
+Request: "Add a delete button to each row of this table."
+Apply: danger color + icon + text label (no color-only), ≥44px hit area, confirm dialog with cancel, focus returns to the row after cancel, `aria-label="Delete <row name>"`.
+
+---
+
 ## 1. Accessibility (CRITICAL)
 
-*WCAG defines the floor for who can use your product. These rules exist because roughly 15–20% of users have a disability that affects how they interact with digital interfaces.*
+*WCAG defines the floor for who can use your product. These rules exist because many users have a disability that affects how they interact with digital interfaces.*
 
 - Minimum 4.5:1 contrast ratio for normal text — the WCAG AA threshold; below this, low-vision users cannot read the text
 - Large text (≥18pt / ≥14pt bold) minimum 3:1 — larger glyphs are easier to resolve at lower contrast
@@ -72,8 +83,8 @@ When rules from different categories conflict, use this tie-breaker order:
 - Use `<label>` with `for` attribute on all inputs — associates label to control for click-targeting and screen readers
 - Skip-to-main-content link for keyboard users — prevents forcing keyboard users to tab through every nav item on every page
 - Sequential h1→h6, no level skips — heading hierarchy is the primary navigation mechanism for screen reader users
-- Never convey information by color alone (add icon/text) — ~8% of men have color vision deficiency
-- Support system text scaling; avoid truncation as text grows — users with low vision commonly set text to 200%+
+- Never convey information by color alone (add icon/text) — color vision deficiency is common
+- Support system text scaling; avoid truncation as text grows — users with low vision commonly enlarge text well beyond default
 - Respect `prefers-reduced-motion`; reduce/disable animations — vestibular disorders make motion-heavy UIs physically nauseating
 - Meaningful `accessibilityLabel`/`accessibilityHint`; logical reading order for screen readers
 - Provide cancel/back in modals and multi-step flows — trapping a screen reader user in a modal with no exit is a critical failure
@@ -83,13 +94,13 @@ When rules from different categories conflict, use this tie-breaker order:
 
 *Touch targets exist for human fingers, not pixel-perfect cursors. The rules below prevent the most common mobile usability failures.*
 
-- Min 44×44pt (Apple HIG) / 48×48dp (Material) — derived from average adult fingertip contact area; smaller targets produce ~40% more mis-taps
+- Min 44×44pt (Apple HIG) / 48×48dp (Material) — derived from average adult fingertip contact area; smaller targets produce markedly more mis-taps
 - Minimum 8px gap between touch targets — adjacent targets without a gap get hit together
 - Use click/tap for primary interactions; don't rely on hover alone — hover doesn't exist on touch screens
 - Disable button during async ops; show spinner or progress — prevents duplicate submissions and signals system state
 - `cursor: pointer` on clickable elements — communicates interactivity on desktop
 - Avoid horizontal swipe on main content; prefer vertical scroll — horizontal swipes conflict with system navigation gestures
-- `touch-action: manipulation` to reduce 300ms tap delay — eliminates the double-tap zoom delay on older browsers
+- `touch-action: manipulation` to reduce 300ms tap delay — eliminates the double-tap zoom delay on older browsers (mostly legacy; harmless)
 - Don't block system gestures (Control Center, back swipe) — overriding system gestures breaks user expectations and may violate platform guidelines
 - Visual feedback on press (ripple/highlight) — confirms the tap registered; absence feels broken
 - Keep primary touch targets away from notch, Dynamic Island, gesture bar — these areas are intercepted by the OS
@@ -98,9 +109,9 @@ When rules from different categories conflict, use this tie-breaker order:
 
 ## 3. Performance (HIGH)
 
-*Performance is a UX feature. A 1-second delay in page response causes ~7% drop in conversions; 3s causes ~53% of mobile users to abandon.*
+*Performance is a UX feature. Slow responses reduce conversions, and long load times make mobile users abandon.*
 
-- Use WebP/AVIF, responsive images (`srcset/sizes`), lazy load non-critical assets — images are typically 50–70% of page weight
+- Use WebP/AVIF, responsive images (`srcset/sizes`), lazy load non-critical assets — images are usually the heaviest assets on a page
 - Declare `width`/`height` or `aspect-ratio` to prevent layout shift (CLS) — CLS is one of Core Web Vitals; unexpected shifts cause mis-taps
 - `font-display: swap` to avoid invisible text (FOIT) — text is invisible until the font loads without this
 - Preload only critical fonts — over-preloading blocks other critical resources
@@ -149,63 +160,7 @@ When rules from different categories conflict, use this tie-breaker order:
 - Keep layout readable and operable in landscape mode
 - Show core content first on mobile; fold or hide secondary content
 
-## 6. Typography & Color (MEDIUM)
-
-*Typography is the primary carrier of meaning. Color reinforces it — but never replaces it.*
-
-- Line-height 1.5–1.75 for body text — below 1.5 lines feel cramped; above 1.75 lines lose connection
-- Limit lines to 65–75 characters
-- Match heading/body font personalities — a slab serif heading with a geometric sans body creates tension
-- Consistent type scale (e.g. 12 14 16 18 24 32)
-- Define semantic color tokens (primary, secondary, error, surface, on-surface) — not raw hex in components; tokens allow theming and auditing
-- Dark mode uses desaturated/lighter tonal variants, not inverted colors — inverted colors produce harsh, high-saturation backgrounds
-- Foreground/background pairs must meet 4.5:1 (AA) or 7:1 (AAA)
-- Functional color (error red, success green) must include icon/text — color alone fails color-blind users
-- Use tabular/monospaced figures for data columns, prices, timers — proportional figures shift column widths as values change
-- Use font-weight to reinforce hierarchy: Bold headings (600–700), Regular body (400), Medium labels (500)
-
-## 7. Animation (MEDIUM)
-
-*Animation communicates cause and effect. Every animation should answer: "what just happened and why?"*
-
-- 150–300ms for micro-interactions; complex transitions ≤400ms; avoid >500ms — humans perceive >500ms as a system pause, not a designed transition
-- Animate `transform`/`opacity` only; never `width`/`height`/`top`/`left` — non-composited properties trigger layout and paint, dropping frames
-- Show skeleton or progress indicator when loading exceeds 300ms
-- Animate 1–2 key elements per view max — animating everything creates visual noise and dilutes meaning
-- `ease-out` for entering, `ease-in` for exiting — mimics natural deceleration/acceleration
-- Every animation must express cause-effect, not just decoration
-- State changes (hover / active / expanded / collapsed) should animate smoothly, not snap
-- Page/screen transitions must maintain spatial continuity — where did the content come from?
-- Respect `prefers-reduced-motion`
-- Prefer spring/physics-based curves for natural feel
-- Exit animations shorter than enter (~60–70% of enter duration) — exits should feel quick; users want to move on
-- Stagger list/grid item entrance by 30–50ms per item
-- Animations must be interruptible
-- Never block user input during animation
-- Forward navigation animates left/up; backward animates right/down
-
-## 8. Forms & Feedback (MEDIUM)
-
-*Forms are where users give you data. Every friction point directly reduces completion rate.*
-
-- Visible label per input (not placeholder-only) — placeholders disappear on focus, leaving users without context mid-entry
-- Show error below the related field — proximity makes the association unambiguous
-- Loading then success/error state on submit
-- Mark required fields (asterisk)
-- Helpful message and action for empty states
-- Auto-dismiss toasts in 3–5s; use `aria-live="polite"` for screen reader announcement
-- Confirm before destructive actions
-- Validate on blur (not keystroke); show error only after user finishes input — keystroke validation feels accusatory
-- Use semantic input types (`email`, `tel`, `number`) to trigger correct mobile keyboard
-- Provide show/hide toggle for password fields
-- Use `autocomplete` / `textContentType` for autofill support
-- Error messages must state cause + how to fix — "invalid input" tells the user nothing actionable
-- After submit error, auto-focus the first invalid field
-- For multiple errors, show summary at top with anchor links to each field
-- Mobile input height ≥44px
-- Destructive actions use semantic danger color (red) and are visually separated
-
-## 9. Navigation Patterns (HIGH)
+## 6. Navigation Patterns (HIGH)
 
 *Navigation is the skeleton of the product. Users build a mental model from it; inconsistency or unpredictability destroys trust.*
 
@@ -225,12 +180,84 @@ When rules from different categories conflict, use this tie-breaker order:
 - After page transition, move focus to main content region for screen reader users
 - Dangerous actions (delete account, logout) must be visually and spatially separated from normal nav items
 
-## 10. Charts & Data (LOW)
+## 7. Avoiding Generic AI-Design Tells (HIGH)
+
+*Every model trained on the same corpus of SaaS templates converges on the same handful of tells. A design that leans on any of these reads as machine-generated even when the layout is otherwise sound.*
+
+- Don't default to Inter (or another ubiquitous grotesque) for every project — pick a typeface that matches the product's personality, or justify the default explicitly
+- Don't reach for a purple-to-blue gradient as the default hero/CTA treatment — it is the single most recognizable "AI startup" tell
+- Don't nest cards inside cards — a bordered/shadowed container inside another bordered/shadowed container adds visual noise without adding structure
+- Don't place gray or low-contrast text on a colored/gradient background — it fails contrast and reads as an afterthought
+- Don't put the same rounded-square icon tile above every heading/feature block — it is decoration, not information, when applied uniformly
+- Don't use bounce or elastic easing on UI transitions — it reads as a toy, not a product; use `ease-out`/`ease-in` per Section 9
+- Don't apply a drop-shadow to every surface by default — reserve elevation for elements that are actually meant to float above content
+- Don't ship the same "headline + subhead + two CTAs" hero pattern without adapting it to the product's actual audience and message
+- Don't use pure black (`#000`) or pure gray (`#808080`) — tint neutrals toward the brand hue so the palette feels considered rather than default
+- Don't fill empty space with generic decorative blobs/grids/dot-patterns that carry no meaning — empty space is not a bug
+- Before delivery, name the one or two specific reference points (a product, a design system, an era) this design is drawing from — if none exist, the design defaulted to the training-data average
+
+## 8. Typography & Color (MEDIUM)
+
+*Typography is the primary carrier of meaning. Color reinforces it — but never replaces it.*
+
+- Line-height 1.5–1.75 for body text — below 1.5 lines feel cramped; above 1.75 lines lose connection
+- Limit body lines per Layout (35–60 mobile, 60–75 desktop)
+- Match heading/body font personalities — a slab serif heading with a geometric sans body creates tension
+- Consistent type scale (e.g. 12 14 16 18 24 32)
+- Define semantic color tokens (primary, secondary, error, surface, on-surface) — not raw hex in components; tokens allow theming and auditing
+- Dark mode uses desaturated/lighter tonal variants, not inverted colors — inverted colors produce harsh, high-saturation backgrounds
+- Foreground/background pairs must meet 4.5:1 (AA) or 7:1 (AAA)
+- Functional color (error red, success green) must include icon/text — color alone fails color-blind users
+- Use tabular/monospaced figures for data columns, prices, timers — proportional figures shift column widths as values change
+- Use font-weight to reinforce hierarchy: Bold headings (600–700), Regular body (400), Medium labels (500)
+
+## 9. Animation (MEDIUM)
+
+*Animation communicates cause and effect. Every animation should answer: "what just happened and why?"*
+
+- 150–300ms for micro-interactions; complex transitions ≤400ms; avoid >500ms — humans perceive >500ms as a system pause, not a designed transition
+- Animate `transform`/`opacity` only; never `width`/`height`/`top`/`left` — non-composited properties trigger layout and paint, dropping frames
+- Show skeleton or progress indicator when loading exceeds 300ms
+- Animate 1–2 key elements per view max — animating everything creates visual noise and dilutes meaning
+- `ease-out` for entering, `ease-in` for exiting — mimics natural deceleration/acceleration
+- Every animation must express cause-effect, not just decoration
+- State changes (hover / active / expanded / collapsed) should animate smoothly, not snap
+- Page/screen transitions must maintain spatial continuity — where did the content come from?
+- Respect `prefers-reduced-motion`
+- Spring/physics curves are fine if critically damped (no overshoot); see the no-bounce rule in AI-Design Tells
+- Exit animations shorter than enter (~60–70% of enter duration) — exits should feel quick; users want to move on
+- Stagger list/grid item entrance by 30–50ms per item
+- Animations must be interruptible
+- Never block user input during animation
+- Forward navigation animates left/up; backward animates right/down
+
+## 10. Forms & Feedback (MEDIUM)
+
+*Forms are where users give you data. Every friction point directly reduces completion rate.*
+
+- Visible label per input (not placeholder-only) — placeholders disappear on focus, leaving users without context mid-entry
+- Show error below the related field — proximity makes the association unambiguous
+- Loading then success/error state on submit
+- Mark required fields (asterisk)
+- Helpful message and action for empty states
+- Auto-dismiss informational toasts in 3–5s; never auto-dismiss toasts with actions or errors (WCAG 2.2.1); use `aria-live="polite"` for screen reader announcement
+- Confirm before destructive actions
+- Validate on blur (not keystroke); show error only after user finishes input — keystroke validation feels accusatory
+- Use semantic input types (`email`, `tel`, `number`) to trigger correct mobile keyboard
+- Provide show/hide toggle for password fields
+- Use `autocomplete` / `textContentType` for autofill support
+- Error messages must state cause + how to fix — "invalid input" tells the user nothing actionable
+- After submit error, auto-focus the first invalid field
+- For multiple errors, show summary at top with anchor links to each field
+- Mobile input height ≥44px
+- Destructive actions use semantic danger color (red) and are visually separated
+
+## 11. Charts & Data (LOW)
 
 *Charts communicate trends and comparisons. A chart that requires the user to decode it has failed its purpose.*
 
 - Match chart type to data type (trend → line, comparison → bar, proportion → pie/donut)
-- Use accessible color palettes; avoid red/green-only pairs — ~8% of men are red-green color blind
+- Use accessible color palettes; avoid red/green-only pairs — red-green color blindness is common
 - Provide table alternative for accessibility; charts alone are not screen-reader friendly
 - Supplement color with patterns/shapes so data is distinguishable without color
 - Always show legend near the chart
@@ -244,22 +271,6 @@ When rules from different categories conflict, use this tie-breaker order:
 - Data lines/bars vs background ≥3:1; data text labels ≥4.5:1
 - Interactive chart elements must be keyboard-navigable
 - Provide a text summary or `aria-label` describing the chart's key insight for screen readers
-
-## 11. Avoiding Generic AI-Design Tells (HIGH)
-
-*Every model trained on the same corpus of SaaS templates converges on the same handful of tells. A design that leans on any of these reads as machine-generated even when the layout is otherwise sound.*
-
-- Don't default to Inter (or another ubiquitous grotesque) for every project — pick a typeface that matches the product's personality, or justify the default explicitly
-- Don't reach for a purple-to-blue gradient as the default hero/CTA treatment — it is the single most recognizable "AI startup" tell
-- Don't nest cards inside cards — a bordered/shadowed container inside another bordered/shadowed container adds visual noise without adding structure
-- Don't place gray or low-contrast text on a colored/gradient background — it fails contrast and reads as an afterthought
-- Don't put the same rounded-square icon tile above every heading/feature block — it is decoration, not information, when applied uniformly
-- Don't use bounce or elastic easing on UI transitions — it reads as a toy, not a product; use `ease-out`/`ease-in` per Section 7
-- Don't apply a drop-shadow to every surface by default — reserve elevation for elements that are actually meant to float above content
-- Don't ship the same "headline + subhead + two CTAs" hero pattern without adapting it to the product's actual audience and message
-- Don't use pure black (`#000`) or pure gray (`#808080`) — tint neutrals toward the brand hue so the palette feels considered rather than default
-- Don't fill empty space with generic decorative blobs/grids/dot-patterns that carry no meaning — empty space is not a bug
-- Before delivery, name the one or two specific reference points (a product, a design system, an era) this design is drawing from — if none exist, the design defaulted to the training-data average
 
 ---
 
