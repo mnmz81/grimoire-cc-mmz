@@ -11,13 +11,6 @@
   },
   "plugins": [
     {
-      "name": "code-review",
-      "source": "./plugins/code-review",
-      "description": "Thorough JavaScript/TypeScript/Python code review across bugs, security, and performance.",
-      "version": "1.0.0",
-      "category": "development"
-    },
-    {
       "name": "coding-style",
       "source": "./plugins/coding-style",
       "description": "Coding-style and output discipline — Karpathy LLM-mistake guardrails (surgical changes, no overcomplication), laziest-senior-dev minimalism (ponytail: YAGNI, stdlib-first, shortest working diff), and caveman output compression. Skills: karpathy-guidelines, ponytail, caveman.",
@@ -49,6 +42,13 @@
       "name": "skill-authoring",
       "source": "./plugins/skill-authoring",
       "description": "Audit, grade, and improve Claude Code skills and Cursor rules, and resolve overlap between them.",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "triple-lens-review",
+      "source": "./plugins/triple-lens-review",
+      "description": "Thorough JavaScript/TypeScript/Python code review across bugs, security, and performance.",
       "version": "1.0.0",
       "category": "development"
     },

@@ -1,5 +1,5 @@
 {
-  "name": "code-review",
+  "name": "triple-lens-review",
   "version": "1.0.0",
   "description": "Thorough JavaScript/TypeScript/Python code review across bugs, security, and performance.",
   "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
