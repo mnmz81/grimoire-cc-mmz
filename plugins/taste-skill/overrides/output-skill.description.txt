@@ -1,0 +1,1 @@
+Enforces complete code and file deliverables — bans placeholder patterns (`// ...`, `// TODO`, "rest follows the same pattern") and handles token-limit splits cleanly. Use when the agent truncates code, skips files, or ships skeletons instead of full implementations. Scope is deliverables only; it does not override the user's chat-prose style (e.g. caveman compression).

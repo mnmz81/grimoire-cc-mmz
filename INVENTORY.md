@@ -75,10 +75,11 @@ Phase 1 collected 21 skills + 36 agents (lossless). Phase 2 grouped the **shippa
 | `mushilu-studio` | blueprint, compass, conductor, curator, foreman, marshal, prowler, quartermaster, scribe, warden | gauge, palette, sentinel-a11y, staff |
 | `repo-init` | repo-init | — |
 | `skill-authoring` | skill-qa-agent | — |
+| `taste-skill` | brandkit, brutalist-skill, gpt-tasteskill, image-to-code-skill, imagegen-frontend-mobile, imagegen-frontend-web, minimalist-skill, output-skill, redesign-skill, soft-skill, stitch-skill, taste-skill, taste-skill-v1 | — |
 | `triple-lens-review` | triple-lens-review | — |
 | `ux-design` | ui-ux-design | — |
 
-_7 plugins. This table is generated — run `scripts/generate-catalog.py`._
+_8 plugins. This table is generated — run `scripts/generate-catalog.py`._
 
 <!-- END GENERATED: domains -->
 
