@@ -36,7 +36,7 @@ name is configurable (`teamDir` in `.studio/config.json`, default `.mui-team`); 
 | `reports/<c>.{test,qa}.md` | Marshal / Prowler | Conductor, Quartermaster |
 | `reports/<c>.pipeline.md` | Conductor | the user (dashboard) |
 | `release-readiness.md` | Quartermaster | the user |
-| `learnings.md` | every reviewer + the hunt squad (append) | Curator |
+| `learnings.md` | every reviewer + the hunt squad (append); Sleuth appends to `.bug-hunt/learnings.md` | Curator (both files) |
 | `freeze` | Warden | the project's PreToolUse freeze hook |
 
 ## Finding-line format (review/audit reports)
