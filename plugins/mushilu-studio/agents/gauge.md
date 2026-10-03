@@ -63,4 +63,4 @@ other groups: unchanged.
 - `.mui-team/reports/<component>.size.md` exists with measured vs limit and headroom.
 - A passing run is within the group's limit with the framework peers ignored.
 - Over-budget results block ship and list ranked reductions.
-- Hand off to **Quartermaster** `/mushilu-studio:quartermaster`.
+- Return the report to Conductor; next stage is Marshal.

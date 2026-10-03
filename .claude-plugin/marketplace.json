@@ -48,7 +48,7 @@
     {
       "name": "triple-lens-review",
       "source": "./plugins/triple-lens-review",
-      "description": "Thorough JavaScript/TypeScript/Python code review across bugs, security, and performance.",
+      "description": "Three-lens code review — bugs, security, and performance — strongest on JavaScript/TypeScript/Python, applies to any language.",
       "version": "1.0.0",
       "category": "development"
     },

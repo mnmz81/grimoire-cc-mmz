@@ -66,7 +66,8 @@ id | severity | category | file:line | title | one-line-desc | evidence | fix
 
 After all hunters finish, read all `*.hunt.md` files and collect every non-comment line.
 Deduplicate by `id`. Make the result deterministic: process reports in the squad-table order (specter → ledger) and, within a report, top to bottom; keep the first occurrence and append later evidence to it.
-Hunters may append recurring patterns to `.bug-hunt/learnings.md`; Curator picks them up.
+
+The hunt orchestrator may append recurring patterns to `.bug-hunt/learnings.md`; Curator picks them up.
 
 ## Output artifact
 

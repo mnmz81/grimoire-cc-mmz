@@ -13,10 +13,12 @@ not re-implement what each stage does.
 
 Two kinds of stages, two mechanisms:
 - **Skill stages** — interactive / stateful / producers. You invoke these in the main context:
-  Compass, Blueprint, Foreman, Marshal, Prowler, Quartermaster (and Curator/Warden out-of-band).
+  Compass, Blueprint, Foreman, Marshal, Prowler, Quartermaster, Scribe (and Curator/Warden out-of-band).
 - **Review/audit agents** — read-only, independent, parallelizable. You **fan these out with
   `Task`** (same pattern the hunt sweep uses for its hunters): Palette, Sentinel-A11y, Staff, Gauge.
   Each runs in its own context and writes its own report file; collect the files when they return.
+
+Scribe runs after the PR is open; push its doc commit to the same PR branch after an explicit user yes.
 
 ## Contract & portability (read first)
 
@@ -88,7 +90,7 @@ Palette    ✅ | Sentinel-A11y ⛔ BLOCKING (no Accessibility story) | Staff ✅
 Marshal    ✅ 88% coverage.
 Quartermaster ✅ PR opened (release-readiness.md).
 Scribe     ✅ forms page updated.
-Surfaced to user: 1 (API shape). Auto-handled: stage ordering, the a11y re-run.
+Surfaced to user: 3 (API shape, commit, PR). Auto-handled: stage ordering, the a11y re-run.
 ```
 
 ## When inputs are thin
@@ -100,7 +102,7 @@ Surfaced to user: 1 (API shape). Auto-handled: stage ordering, the a11y re-run.
 ## Done criteria
 
 - Every stage has a green (or explicitly accepted) artifact, in order.
-- Only taste decisions reached the user; mechanics were auto-run.
+- Only taste decisions and the commit/PR confirmations reached the user; mechanics were auto-run.
 - `.mui-team/reports/<component>.pipeline.md` is the single status dashboard.
 
 ## Cross-cutting bug sweep

@@ -53,7 +53,7 @@ When rules from different categories conflict, use this tie-breaker order:
 
 **Platform idioms beat cross-platform consistency.** An iOS-style action sheet on Android (instead of a Material bottom sheet/dialog) breaks expectations, even if it matches the web version. When building cross-platform, implement per-platform variants rather than forcing a single pattern.
 
-**Content legibility beats layout compactness.** If meeting the 60–75 char line-length guideline requires a layout change, make the change. Readable text is non-negotiable.
+**Content legibility beats layout compactness.** If meeting the 60–75 char (desktop) line-length guideline requires a layout change, make the change. Readable text is non-negotiable.
 
 **When performance and aesthetics conflict,** degrade the visual (reduce blur, simplify animation, drop shadow) before degrading performance (CLS, LCP, input latency).
 

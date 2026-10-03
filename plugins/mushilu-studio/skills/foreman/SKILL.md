@@ -64,4 +64,5 @@ Foreman only records which step it's on and what moved.
 - All 9 subtasks `completed` in order, each verified before the next.
 - The build log reflects final status and touched files.
 - Component exported from its group barrel; one clean commit (per the workflow's final step).
+- Make the final commit only after an explicit user yes (Conductor's confirm gate applies here too).
 - Hand off to the review trio — the Palette agent (mushilu-studio:palette), the Sentinel-A11y agent (mushilu-studio:sentinel-a11y), the Staff agent (mushilu-studio:staff).

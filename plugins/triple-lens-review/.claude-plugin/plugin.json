@@ -1,6 +1,6 @@
 {
   "name": "triple-lens-review",
   "version": "1.0.0",
-  "description": "Thorough JavaScript/TypeScript/Python code review across bugs, security, and performance.",
+  "description": "Three-lens code review — bugs, security, and performance — strongest on JavaScript/TypeScript/Python, applies to any language.",
   "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
 }

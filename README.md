@@ -23,7 +23,7 @@ Replace `<domain>` with any plugin below, e.g. `/plugin install debugging@grimoi
 | `mushilu-studio` | End-to-end Mushilu-San-UI component pipeline — scope, spec, build, parallel review/audit, test, docs, and release — orchestrated as one workflow. |
 | `repo-init` | Bootstrap a GitHub repository with enterprise-grade defaults — branch protection (no direct push to main, require PR + N approvals, dismiss stale reviews), required CI status checks, squash-merge linear history, secret scanning, Dependabot alerts, and auto-delete of merged branches. |
 | `skill-authoring` | Audit, grade, and improve Claude Code skills and Cursor rules, and resolve overlap between them. |
-| `triple-lens-review` | Thorough JavaScript/TypeScript/Python code review across bugs, security, and performance. |
+| `triple-lens-review` | Three-lens code review — bugs, security, and performance — strongest on JavaScript/TypeScript/Python, applies to any language. |
 | `ux-design` | UI/UX design intelligence for web and mobile — accessibility, layout, typography, components, and data visualization. |
 
 <!-- END GENERATED: readme-domains -->
