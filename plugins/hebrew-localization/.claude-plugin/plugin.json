@@ -1,0 +1,6 @@
+{
+  "name": "hebrew-localization",
+  "version": "1.0.0",
+  "description": "Hebrew writing and localization for Angular-first web apps — Hebrew product and marketing copy (voice, gender-neutral address, loanwords, punctuation), removing AI tells from Hebrew text, Hebrew i18n (one/two/other plurals, he-IL dates and shekel formatting, ID validation), and RTL layout (logical properties, bidi isolation, icon mirroring, Angular CDK direction). Skills: hebrew-copywriting, hebrew-ai-tells, hebrew-i18n, hebrew-rtl-layout.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}
