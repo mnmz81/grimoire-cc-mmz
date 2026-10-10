@@ -2,7 +2,7 @@
 name: hebrew-rtl-layout
 description: >
   Make web UIs work right-to-left for Hebrew, Angular first — dir/lang on
-  <html>, CSS logical properties instead of left/right, :dir(rtl) overrides in
+  the html element, CSS logical properties instead of left/right, :dir(rtl) overrides in
   component styles, bidi isolation for numbers, emails, code and user content,
   which icons to mirror, Angular CDK/Material direction (Directionality, the
   Dir directive, dialogs and overlays), RTL scroll math, Hebrew fonts and
@@ -165,30 +165,10 @@ directional ones; nothing flips automatically.
 
 ## 6. Angular CDK and Material
 
-- Material components (form fields, slider, tabs, paginator, sidenav, menu,
-  select) take direction from the nearest `Directionality`. With §1 in place
-  they mirror on their own.
-- **Overlays render under `<body>`**, outside your `[dir]` container.
-  Connected overlays (menu, select, autocomplete, tooltip) pick up direction
-  from the trigger's injector. Global ones (dialog, bottom sheet, snack bar,
-  custom `Overlay.create`) should receive it explicitly when direction can
-  change at runtime:
-
-  ```ts
-  private readonly dir = inject(Directionality);
-
-  open(): void {
-    this.dialog.open(EditDialogComponent, { direction: this.dir.valueSignal() });
-  }
-  ```
-
-  `OverlayConfig.direction` accepts a `Direction` or the `Directionality`
-  instance itself.
-- **Scrolling:** in RTL, `scrollLeft` is `0` at the start (right edge) and
-  goes negative toward the end. Code like `el.scrollLeft += 300` or
-  `Math.max(0, …)` breaks. Use `CdkScrollable`, whose
-  `scrollTo({ start: … })` and `measureScrollOffset('start')` handle RTL, or
-  `el.scrollBy({ left: isRtl ? -delta : delta })`.
+Material components mirror on their own once §1 is in place. Overlays
+(dialogs, snack bars, global `Overlay.create`) render under `<body>` and need
+an explicit `direction`. RTL scroll math differs from LTR. Full patterns and
+code: `references/angular-cdk-material.md`.
 
 ## 7. Hebrew typography
 
