@@ -16,13 +16,31 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install PyYAML
+        run: python3 -m pip install pyyaml
+
       - name: Catalog in sync with plugin.json manifests
         run: python3 scripts/generate-catalog.py --check
+
+      - name: SKILL.md frontmatter is strict YAML
+        run: python3 scripts/check-frontmatter.py
 
       - name: Shellcheck vendored scripts
         run: |
           sudo apt-get update -y && sudo apt-get install -y shellcheck
-          shellcheck plugins/debugging/scripts/open-audit-issues.sh plugins/repo-init/scripts/repo-init.sh
+          shellcheck plugins/debugging/scripts/open-audit-issues.sh plugins/repo-init/scripts/repo-init.sh \
+            install.sh tests/install_test.sh scripts/check-skills-cli.sh
+
+      - name: install.sh tests
+        run: tests/install_test.sh
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: npx skills discovers every skill
+        run: scripts/check-skills-cli.sh
 
       # `claude plugin validate` runs when the CLI is available in CI; the catalog
       # drift gate above is the always-on check that needs no external tooling.

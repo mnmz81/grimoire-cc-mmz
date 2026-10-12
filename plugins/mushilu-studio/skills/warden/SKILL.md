@@ -1,6 +1,6 @@
 ---
 name: warden
-description: Controls the Studio safety markers that drive the PreToolUse hooks — freeze edits to one directory, lift the freeze, or enable max-safety guard mode. Use when: the user wants to lock edits to a directory during a risky change or debug session, asks to "freeze", "unfreeze", "guard", "lock edits", or set up safety before production work. Claude Code only — it manages the hook markers.
+description: "Controls the Studio safety markers that drive the PreToolUse hooks — freeze edits to one directory, lift the freeze, or enable max-safety guard mode. Use when: the user wants to lock edits to a directory during a risky change or debug session, asks to \"freeze\", \"unfreeze\", \"guard\", \"lock edits\", or set up safety before production work. Claude Code only — it manages the hook markers."
 allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 

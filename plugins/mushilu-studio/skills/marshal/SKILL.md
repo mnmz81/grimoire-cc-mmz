@@ -1,6 +1,6 @@
 ---
 name: marshal
-description: Drives a component's vitest suite to green with the library's zoneless testing patterns and ≥80% coverage, including one test per ARIA behavior. Use when: a component is built and the user wants tests written or verified, asks to "run the tests", "add coverage", "test this component", or gate coverage before ship. Seventh stage of the Studio pipeline.
+description: "Drives a component's vitest suite to green with the library's zoneless testing patterns and ≥80% coverage, including one test per ARIA behavior. Use when: a component is built and the user wants tests written or verified, asks to \"run the tests\", \"add coverage\", \"test this component\", or gate coverage before ship. Seventh stage of the Studio pipeline."
 allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 

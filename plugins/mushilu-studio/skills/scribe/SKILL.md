@@ -1,6 +1,6 @@
 ---
 name: scribe
-description: Keeps the MDX group docs in sync with shipped components — adds each new component to its group page and tracks Diataxis coverage gaps. Use when: a component shipped or changed and the user wants docs updated, asks to "update the docs", "add to the MDX", "document this component", or check documentation coverage. Runs after Quartermaster, or whenever docs drift from code.
+description: "Keeps the MDX group docs in sync with shipped components — adds each new component to its group page and tracks Diataxis coverage gaps. Use when: a component shipped or changed and the user wants docs updated, asks to \"update the docs\", \"add to the MDX\", \"document this component\", or check documentation coverage. Runs after Quartermaster, or whenever docs drift from code."
 allowed-tools: [Read, Grep, Glob, Bash, Edit, Write]
 ---
 

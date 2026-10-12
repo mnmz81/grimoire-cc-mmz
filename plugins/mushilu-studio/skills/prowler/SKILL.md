@@ -1,6 +1,6 @@
 ---
 name: prowler
-description: Browser-driven QA — drives a component's Storybook stories in a real browser to catch interaction, console, and visual bugs that unit tests miss, then writes a regression test for each. Use when: a component is built and unit-tested and the user wants real-browser QA, asks to "QA this", "find bugs in the browser", "test the stories", "check Storybook", or catch runtime/visual defects before ship. Runs after Marshal, before Quartermaster.
+description: "Browser-driven QA — drives a component's Storybook stories in a real browser to catch interaction, console, and visual bugs that unit tests miss, then writes a regression test for each. Use when: a component is built and unit-tested and the user wants real-browser QA, asks to \"QA this\", \"find bugs in the browser\", \"test the stories\", \"check Storybook\", or catch runtime/visual defects before ship. Runs after Marshal, before Quartermaster."
 allowed-tools: [Read, Grep, Glob, Bash, Edit, Write, mcp__plugin_playwright_playwright]
 ---
 
