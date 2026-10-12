@@ -1,6 +1,6 @@
 ---
 name: conductor
-description: Orchestrates a component end-to-end through the Studio pipeline, running each stage in order and surfacing only taste decisions to the user. Use when: the user wants to take a component "end to end", "autopilot", "run the whole pipeline", or build-review-test-ship without driving each stage by hand. The orchestration layer of the Studio.
+description: "Orchestrates a component end-to-end through the Studio pipeline, running each stage in order and surfacing only taste decisions to the user. Use when: the user wants to take a component \"end to end\", \"autopilot\", \"run the whole pipeline\", or build-review-test-ship without driving each stage by hand. The orchestration layer of the Studio."
 allowed-tools: [Read, Grep, Glob, Bash, Edit, Write, Task]
 ---
 

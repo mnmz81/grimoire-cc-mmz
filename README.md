@@ -12,6 +12,34 @@ Personal Claude Code skills & agents, consolidated into a **domain-based plugin 
 
 Replace `<domain>` with any plugin below, e.g. `/plugin install debugging@grimoire-cc-mmz`.
 
+## Install in other agents (Codex, Cursor, Copilot, Gemini, …)
+
+The skills are plain `SKILL.md` folders, so any agent that reads Agent Skills can use them. Claude Code users should stick with the plugins above: they also ship the agents, hooks and scripts.
+
+**With the [`skills` CLI](https://github.com/vercel-labs/skills)** — it finds every skill through `.claude-plugin/marketplace.json`:
+
+```bash
+npx skills add mnmz81/grimoire-cc-mmz --list
+npx skills add mnmz81/grimoire-cc-mmz --skill design-taste-frontend --agent codex
+```
+
+Pass the **install name** (the `name:` in the SKILL frontmatter, listed in [`llms.txt`](./llms.txt)), not the folder name.
+
+**With `install.sh`** — clone once, then symlink. Links instead of copies, so `git pull` updates every installed skill in place:
+
+```bash
+./install.sh --codex                       # ~/.agents/skills (Codex, Cline, Warp, Zed, …)
+./install.sh --cursor                      # ~/.cursor/skills
+./install.sh --codex --plugin taste-skill  # one plugin only
+./install.sh --codex caveman ponytail      # named skills only
+./install.sh --list                        # install name -> folder
+./install.sh --codex --uninstall           # remove only links that point into this repo
+```
+
+`--claude`, `--all-agents` and `--target DIR` are also available; `./install.sh --help` shows everything. Existing folders and symlinks from other installs are never replaced.
+
+Caveat: `hunt`, `conductor` and `repo-init` call scripts through `${CLAUDE_PLUGIN_ROOT}`; outside Claude Code their instructions load but those scripts need the plugin.
+
 ## Domains
 
 <!-- BEGIN GENERATED: readme-domains (scripts/generate-catalog.py) -->
@@ -43,8 +71,13 @@ plugins/
     skills/<skill>/SKILL.md  # auto-discovered
     agents/<agent>.md        # auto-discovered (mushilu-studio, debugging)
     references/*.md          # shared protocol/schema docs (not auto-loaded)
+install.sh                  # symlink skills into Codex/Cursor/Claude skill dirs
+llms.txt                    # generated index: one line per skill (install name, path, description)
+tests/install_test.sh       # install.sh tests (throwaway dirs only)
 scripts/
-  generate-catalog.py       # source of truth: regenerate marketplace.json + INVENTORY table
+  generate-catalog.py       # source of truth: regenerate marketplace.json, INVENTORY/README tables, llms.txt
+  check-frontmatter.py      # every SKILL.md frontmatter is strict YAML (--fix quotes bad descriptions)
+  check-skills-cli.sh       # `npx skills` discovers every skill
   collect.sh                # Phase 1 (historical): gather scattered skills/agents
   build-plugins.sh          # Phase 2 (historical, one-shot): reshape into domain plugins
   restructure-studio.sh     # R2/R3 (one-shot): consolidate Studio + split out sleuth
@@ -66,5 +99,5 @@ scripts/
    ```
 2. Drop skills under `plugins/<domain>/skills/<skill>/` and agents under `plugins/<domain>/agents/`. Keep every asset a skill references **inside** its own plugin folder (reference it as `${CLAUDE_PLUGIN_ROOT}/...`) — plugins are copied to a cache on install, so any path pointing outside the plugin breaks.
 3. Regenerate the catalog: `scripts/generate-catalog.py`. The per-plugin `plugin.json` is the **single source of truth** — the script derives `.claude-plugin/marketplace.json` and the INVENTORY domains table from it, so there is no second file to keep in sync by hand.
-4. Validate: `claude plugin validate .` and `scripts/generate-catalog.py --check` (both run in CI).
+4. Validate: `claude plugin validate .`, `scripts/generate-catalog.py --check`, `scripts/check-frontmatter.py`, `tests/install_test.sh` and `scripts/check-skills-cli.sh` (all run in CI; the Python scripts need `pip install pyyaml`).
 5. Open a PR — `main` is protected and only merges via PR.
