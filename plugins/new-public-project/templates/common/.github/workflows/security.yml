@@ -30,6 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4 # pin
       - uses: github/codeql-action/init@v3 # pin
+        if: hashFiles({{CODEQL_GLOB}}) != ''
         with:
           languages: {{CODEQL_LANG}}
       - uses: github/codeql-action/analyze@v3 # pin
+        if: hashFiles({{CODEQL_GLOB}}) != ''

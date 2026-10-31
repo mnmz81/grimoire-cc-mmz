@@ -20,9 +20,9 @@ gh auth status >/dev/null 2>&1 || { echo "gh not authenticated: run gh auth logi
 [ ! -e "$name" ] || { echo "./$name already exists" >&2; exit 1; }
 
 case "$type" in
-  ts|node) ignore=Node eco=npm lang=javascript-typescript ci=node ;;
-  python)  ignore=Python eco=pip lang=python ci=python ;;
-  static)  ignore=Node eco="" lang=javascript-typescript ci="" ;;
+  ts|node) ignore=Node eco=npm lang=javascript-typescript ci=node glob="'**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'" ;;
+  python)  ignore=Python eco=pip lang=python ci=python glob="'**/*.py'" ;;
+  static)  ignore=Node eco="" lang=javascript-typescript ci="" glob="'**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'" ;;
   *) echo "bad --type: $type" >&2; exit 2 ;;
 esac
 
@@ -43,8 +43,8 @@ fi
 # fill placeholders (NAME/OWNER/YEAR/DESC/CODEQL_LANG)
 files=$(grep -rlE '\{\{[A-Z_]+\}\}' . --exclude-dir=.git)
 for f in $files; do
-  OWNER="$owner" NAME="$name" YEAR="$(date +%Y)" DESC="${desc:-$name}" LANG_="$lang" \
-    perl -pi -e 's/\{\{OWNER\}\}/$ENV{OWNER}/g; s/\{\{NAME\}\}/$ENV{NAME}/g; s/\{\{YEAR\}\}/$ENV{YEAR}/g; s/\{\{DESC\}\}/$ENV{DESC}/g; s/\{\{CODEQL_LANG\}\}/$ENV{LANG_}/g' "$f"
+  OWNER="$owner" NAME="$name" YEAR="$(date +%Y)" DESC="${desc:-$name}" LANG_="$lang" GLOB="$glob" \
+    perl -pi -e 's/\{\{OWNER\}\}/$ENV{OWNER}/g; s/\{\{NAME\}\}/$ENV{NAME}/g; s/\{\{YEAR\}\}/$ENV{YEAR}/g; s/\{\{DESC\}\}/$ENV{DESC}/g; s/\{\{CODEQL_LANG\}\}/$ENV{LANG_}/g; s/\{\{CODEQL_GLOB\}\}/$ENV{GLOB}/g' "$f"
 done
 
 # pin every "uses: x/y@tag # pin" to a commit SHA

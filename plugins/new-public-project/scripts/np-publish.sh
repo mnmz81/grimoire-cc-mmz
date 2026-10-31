@@ -16,7 +16,7 @@ fi
 
 [ "$vis" = PUBLIC ] || gh repo edit "$repo" --visibility public --accept-visibility-change-consequences
 failed=()
-api() { gh api -X "$1" "repos/$repo/$2" "${@:3}" >/dev/null || { failed+=("$1 $2"); echo "STEP FAILED: $1 $2" >&2; }; }
+api() { gh api -X "$1" "repos/$repo${2:+/$2}" "${@:3}" >/dev/null || { failed+=("$1 $2"); echo "STEP FAILED: $1 $2" >&2; }; }
 
 # squash-only, auto-delete branches, no wiki/projects/discussions
 api PATCH "" -F allow_squash_merge=true -F allow_merge_commit=false -F allow_rebase_merge=false \
@@ -41,7 +41,8 @@ checks='[{"context":"gitleaks"},{"context":"pr-title"}'
 checks+=']'
 
 # main: PR only, 1 approval from code owner, threads resolved, squash, no force-push/delete. Admin bypass via PR only.
-api POST rulesets --input - <<JSON
+has() { gh api "repos/$repo/rulesets" --jq ".[].name" | grep -qx "$1"; }
+has protect-main || api POST rulesets --input - <<JSON
 {"name":"protect-main","target":"branch","enforcement":"active",
  "conditions":{"ref_name":{"include":["~DEFAULT_BRANCH"],"exclude":[]}},
  "bypass_actors":[{"actor_id":5,"actor_type":"RepositoryRole","bypass_mode":"pull_request"}],
@@ -53,7 +54,7 @@ api POST rulesets --input - <<JSON
 JSON
 
 # release tags v*: cannot be moved or deleted
-api POST rulesets --input - <<'JSON'
+has protect-release-tags || api POST rulesets --input - <<'JSON'
 {"name":"protect-release-tags","target":"tag","enforcement":"active",
  "conditions":{"ref_name":{"include":["refs/tags/v*"],"exclude":[]}},
  "rules":[{"type":"deletion"},{"type":"non_fast_forward"},{"type":"update"}]}
