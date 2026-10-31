@@ -12,10 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4 # pin
       - uses: actions/setup-node@v4 # pin
+        if: hashFiles('package.json') != ''
         with:
           node-version: lts/*
-          cache: npm
-      - run: npm ci
+      - name: install
+        if: hashFiles('package.json') != ''
+        run: if [ -f package-lock.json ]; then npm ci; else npm install; fi
       - run: npm run lint --if-present
+        if: hashFiles('package.json') != ''
       - run: npm test --if-present
+        if: hashFiles('package.json') != ''
       - run: npm run build --if-present
+        if: hashFiles('package.json') != ''

@@ -44,9 +44,9 @@ Scripts live in `${CLAUDE_PLUGIN_ROOT}/scripts/`. Needs `gh` (authenticated), `g
 
 ## Notes and limits
 
-- Static sites with no JS: the `codeql` job fails with "no source code". It is not a required check; delete the job if it is noise.
+- `ci` and `codeql` skip their steps until the repo has a `package.json` or source files, so a fresh scaffold passes its required checks.
 - If the repo gets a required check from a new workflow, add its job name to the `checks` list in `np-publish.sh` (or edit the ruleset on GitHub).
 - Branch protection is not applied while private. Do not invite collaborators before publishing.
 - If a protection step fails, `np-publish.sh --yes` keeps going, prints `STEP FAILED` lines, and ends with `INCOMPLETE` and exit 1. The repo is already public then: fix the cause and rerun (an already-created ruleset will report a harmless duplicate error).
-- `np-publish.sh --yes` was verified for syntax and its failure handling only; the scaffold and audit were tested locally. First real run: watch the output, and check Settings > Rules afterwards.
+- Tested end to end on a throwaway repo: audit, public flip, rulesets, direct push to `main` rejected, and a PR where `gitleaks`, `pr-title`, `ci` and `codeql` all pass. Not tested: the owner force-merge (`gh pr merge --admin`), so try it once on your first real PR.
 - Never bypass the pre-commit hook with `--no-verify` unless the user confirms a false positive.
