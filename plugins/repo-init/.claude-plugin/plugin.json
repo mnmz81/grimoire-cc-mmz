@@ -1,6 +1,6 @@
 {
   "name": "repo-init",
-  "version": "1.0.0",
-  "description": "Bootstrap a GitHub repository with enterprise-grade defaults — branch protection (no direct push to main, require PR + N approvals, dismiss stale reviews), required CI status checks, squash-merge linear history, secret scanning, Dependabot alerts, and auto-delete of merged branches.",
+  "version": "1.0.1",
+  "description": "Create a new GitHub repository with protection already switched on: nobody can push straight to main, every change needs a pull request with 1 approval, CI checks must pass, merges are squash-only, secret scanning and Dependabot alerts are enabled, and merged branches are deleted automatically. Runs one script (needs the gh CLI, logged in) and takes about a minute. It sets up GitHub settings only: it adds no CI workflows, license, security policy or privacy audit. Use it whenever the user wants to create or bootstrap a repo, protect main, or require PRs and approvals.",
   "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
 }

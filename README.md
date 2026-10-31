@@ -38,7 +38,7 @@ Pass the **install name** (the `name:` in the SKILL frontmatter, listed in [`llm
 
 `--claude`, `--all-agents` and `--target DIR` are also available; `./install.sh --help` shows everything. Existing folders and symlinks from other installs are never replaced.
 
-Caveat: `hunt`, `conductor` and `repo-init` call scripts through `${CLAUDE_PLUGIN_ROOT}`; outside Claude Code their instructions load but those scripts need the plugin.
+Caveat: `hunt`, `conductor`, `repo-init` and `new-public-project` call scripts through `${CLAUDE_PLUGIN_ROOT}`; outside Claude Code their instructions load but those scripts need the plugin.
 
 ## Domains
 
@@ -50,7 +50,8 @@ Caveat: `hunt`, `conductor` and `repo-init` call scripts through `${CLAUDE_PLUGI
 | `debugging` | Debugging discipline plus whole-repo bug sweeps — systematic root-cause-first fixing (sleuth: investigate before editing, one hypothesis at a time, stop after three failed fixes) and a fan-out of read-only hunters (hunt + 10 hunter agents) that surface bugs across an entire codebase. Skills: sleuth, hunt. |
 | `hebrew-localization` | Hebrew writing and localization for Angular-first web apps — Hebrew product and marketing copy (voice, gender-neutral address, loanwords, punctuation), removing AI tells from Hebrew text, Hebrew i18n (one/two/other plurals, he-IL dates and shekel formatting, ID validation), and RTL layout (logical properties, bidi isolation, icon mirroring, Angular CDK direction). Skills: hebrew-copywriting, hebrew-ai-tells, hebrew-i18n, hebrew-rtl-layout. |
 | `mushilu-studio` | End-to-end Mushilu-San-UI component pipeline — scope, spec, build, parallel review/audit, test, docs, and release — orchestrated as one workflow. |
-| `repo-init` | Bootstrap a GitHub repository with enterprise-grade defaults — branch protection (no direct push to main, require PR + N approvals, dismiss stale reviews), required CI status checks, squash-merge linear history, secret scanning, Dependabot alerts, and auto-delete of merged branches. |
+| `new-public-project` | Start a new open-source project secure from the first commit: scaffolds LICENSE, SECURITY.md, CODEOWNERS, PR and issue templates, CI (gitleaks, CodeQL, PR-title lint), Dependabot and a secret-blocking pre-commit hook, creates a private GitHub repo, then audits for secrets and personal data before making it public and applying branch protection, push protection and locked-down Actions. |
+| `repo-init` | Create a new GitHub repository with protection already switched on: nobody can push straight to main, every change needs a pull request with 1 approval, CI checks must pass, merges are squash-only, secret scanning and Dependabot alerts are enabled, and merged branches are deleted automatically. Runs one script (needs the gh CLI, logged in) and takes about a minute. It sets up GitHub settings only: it adds no CI workflows, license, security policy or privacy audit. Use it whenever the user wants to create or bootstrap a repo, protect main, or require PRs and approvals. |
 | `skill-authoring` | Audit, grade, and improve Claude Code skills and Cursor rules, and resolve overlap between them. |
 | `taste-skill` | Anti-slop frontend design skills vendored from leonxlnx/taste-skill (MIT) — brief-driven design read, VARIANCE/MOTION/DENSITY dials, AI-tell ban list, redesign audit, style presets (soft, minimalist, brutalist, stitch), full-output enforcement, and image-gen reference skills (web, mobile, brandkit). |
 | `triple-lens-review` | Three-lens code review — bugs, security, and performance — strongest on JavaScript/TypeScript/Python, applies to any language. |

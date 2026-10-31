@@ -39,10 +39,17 @@
       "category": "development"
     },
     {
+      "name": "new-public-project",
+      "source": "./plugins/new-public-project",
+      "description": "Start a new open-source project secure from the first commit: scaffolds LICENSE, SECURITY.md, CODEOWNERS, PR and issue templates, CI (gitleaks, CodeQL, PR-title lint), Dependabot and a secret-blocking pre-commit hook, creates a private GitHub repo, then audits for secrets and personal data before making it public and applying branch protection, push protection and locked-down Actions.",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
       "name": "repo-init",
       "source": "./plugins/repo-init",
-      "description": "Bootstrap a GitHub repository with enterprise-grade defaults — branch protection (no direct push to main, require PR + N approvals, dismiss stale reviews), required CI status checks, squash-merge linear history, secret scanning, Dependabot alerts, and auto-delete of merged branches.",
-      "version": "1.0.0",
+      "description": "Create a new GitHub repository with protection already switched on: nobody can push straight to main, every change needs a pull request with 1 approval, CI checks must pass, merges are squash-only, secret scanning and Dependabot alerts are enabled, and merged branches are deleted automatically. Runs one script (needs the gh CLI, logged in) and takes about a minute. It sets up GitHub settings only: it adds no CI workflows, license, security policy or privacy audit. Use it whenever the user wants to create or bootstrap a repo, protect main, or require PRs and approvals.",
+      "version": "1.0.1",
       "category": "development"
     },
     {

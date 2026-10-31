@@ -1,0 +1,20 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # pin
+      - uses: actions/setup-python@v5 # pin
+        with:
+          python-version: "3.x"
+      - run: pip install ruff pytest
+      - run: test ! -f requirements.txt || pip install -r requirements.txt
+      - run: ruff check .
+      - run: pytest

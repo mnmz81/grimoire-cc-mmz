@@ -1,0 +1,6 @@
+{
+  "name": "new-public-project",
+  "version": "1.0.0",
+  "description": "Start a new open-source project secure from the first commit: scaffolds LICENSE, SECURITY.md, CODEOWNERS, PR and issue templates, CI (gitleaks, CodeQL, PR-title lint), Dependabot and a secret-blocking pre-commit hook, creates a private GitHub repo, then audits for secrets and personal data before making it public and applying branch protection, push protection and locked-down Actions.",
+  "author": { "name": "Moris Zakay", "url": "https://github.com/mnmz81" }
+}
