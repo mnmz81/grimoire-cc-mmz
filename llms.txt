@@ -45,9 +45,9 @@ End-to-end Mushilu-San-UI component pipeline — scope, spec, build, parallel re
 
 ## repo-init
 
-Bootstrap a GitHub repository with enterprise-grade defaults — branch protection (no direct push to main, require PR + N approvals, dismiss stale reviews), required CI status checks, squash-merge linear history, secret scanning, Dependabot alerts, and auto-delete of merged branches.
+Create a new GitHub repository with protection already switched on: nobody can push straight to main, every change needs a pull request with 1 approval, CI checks must pass, merges are squash-only, secret scanning and Dependabot alerts are enabled, and merged branches are deleted automatically. Runs one script (needs the gh CLI, logged in) and takes about a minute. It sets up GitHub settings only: it adds no CI workflows, license, security policy or privacy audit. Use it whenever the user wants to create or bootstrap a repo, protect main, or require PRs and approvals.
 
-- [repo-init](plugins/repo-init/skills/repo-init/SKILL.md): Initialize a new GitHub repository with enterprise-grade defaults: branch protection (no direct push to main, require PR + 1 approval, dismiss stale reviews), CI status checks required, squash-merge enforced, secret scanning, Dependabot alerts, and auto-delete of merged branches. Use whenever the user wants to create a new repo, set up a project from scratch, bootstrap a repository, or configure branch protections — even if they don't say "enterprise" explicitly.
+- [repo-init](plugins/repo-init/skills/repo-init/SKILL.md): Create a new GitHub repository with protection already switched on: nobody can push straight to main, every change needs a pull request with 1 approval, CI checks must pass, merges are squash-only, secret scanning and Dependabot alerts are enabled, and merged branches are deleted automatically. Runs one script (needs the gh CLI, logged in) and takes about a minute. It sets up GitHub settings only: it adds no CI workflows, license, security policy or privacy audit. Use it whenever the user wants to create or bootstrap a repo, protect main, or require PRs and approvals.
 
 ## skill-authoring
 

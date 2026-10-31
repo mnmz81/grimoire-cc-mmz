@@ -1,12 +1,13 @@
 ---
 name: repo-init
 description: >
-  Initialize a new GitHub repository with enterprise-grade defaults: branch protection
-  (no direct push to main, require PR + 1 approval, dismiss stale reviews), CI status
-  checks required, squash-merge enforced, secret scanning, Dependabot alerts, and
-  auto-delete of merged branches. Use whenever the user wants to create a new repo,
-  set up a project from scratch, bootstrap a repository, or configure branch protections —
-  even if they don't say "enterprise" explicitly.
+  Create a new GitHub repository with protection already switched on: nobody can push
+  straight to main, every change needs a pull request with 1 approval, CI checks must
+  pass, merges are squash-only, secret scanning and Dependabot alerts are enabled, and
+  merged branches are deleted automatically. Runs one script (needs the gh CLI, logged in)
+  and takes about a minute. It sets up GitHub settings only: it adds no CI workflows,
+  license, security policy or privacy audit. Use it whenever the user wants to create or
+  bootstrap a repo, protect main, or require PRs and approvals.
 argument-hint: "<repo-name> [--type Node] [--public] [--required-checks ci,lint]"
 license: MIT
 ---
@@ -23,6 +24,13 @@ Create and configure a GitHub repository with enterprise-grade defaults in one s
 4. Enforces squash merge (linear history), requires CI status checks
 5. Enables secret scanning + Dependabot vulnerability alerts
 6. Configures auto-delete of feature branches after merge
+
+## Heads up
+
+- Protection rules are enforced on public repos. On the GitHub free plan a private repo is created with the same settings, but GitHub does not enforce them until the repo is public or the plan is upgraded.
+- `enforce_admins` is on, so even the repo owner cannot push to main or merge without the required approval. Set it to `false` in the script if the owner should be able to force-merge.
+- With 1 required approval, a solo owner cannot approve their own PR. Use `--min-approvals 0`, or turn `enforce_admins` off.
+- It does not add files (CI workflows, LICENSE, SECURITY.md, CODEOWNERS), a pre-commit secret hook, or a check for personal data in the history.
 
 ## Prerequisites
 
