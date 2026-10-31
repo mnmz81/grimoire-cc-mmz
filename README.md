@@ -102,3 +102,11 @@ scripts/
 3. Regenerate the catalog: `scripts/generate-catalog.py`. The per-plugin `plugin.json` is the **single source of truth** — the script derives `.claude-plugin/marketplace.json` and the INVENTORY domains table from it, so there is no second file to keep in sync by hand.
 4. Validate: `claude plugin validate .`, `scripts/generate-catalog.py --check`, `scripts/check-frontmatter.py`, `tests/install_test.sh` and `scripts/check-skills-cli.sh` (all run in CI; the Python scripts need `pip install pyyaml`).
 5. Open a PR — `main` is protected and only merges via PR.
+
+## Contributing
+
+Enable the secret-blocking pre-commit hook once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
